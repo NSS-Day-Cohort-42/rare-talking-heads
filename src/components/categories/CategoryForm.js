@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react"
+import React, {useContext, useEffect, useState} from "react"
 
 import {CategoryContext} from "./CategoryProvider"
 
@@ -27,8 +27,8 @@ export const CategoryForm = (props) => {
     const makeNewCategory = () => {
         if(editMode) {
             updatedCategory({
-                id = category.id,
-                name = category.name
+                id : category.id,
+                name : category.name
             })
         } else {
             createCategory({
