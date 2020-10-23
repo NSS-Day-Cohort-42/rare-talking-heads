@@ -1,0 +1,22 @@
+.post-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100vw;
+    flex-direction: column;
+    border: 1px solid red;
+}
+
+.post-preview {
+    width: 90%;
+    border: 1px solid black;
+    margin: 15px;
+}
+
+.post-preview-header {
+    width: 100%;
+    
+}
+.post-preview-title {
+    text-align: center;
+}
