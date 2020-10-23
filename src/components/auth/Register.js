@@ -16,7 +16,7 @@ export const Register = (props) => {
 
         if (password.current.value === verifyPassword.current.value) {
             const newUser = {
-                "username": email.current.value,
+                "user_name": email.current.value,
                 "first_name": firstName.current.value,
                 "last_name": lastName.current.value,
                 "bio": bio.current.value,
@@ -24,7 +24,7 @@ export const Register = (props) => {
                 "password": password.current.value
             }
 
-            return fetch("http://127.0.0.1:8088/register", {
+            return fetch("http://localhost:8088/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -34,10 +34,8 @@ export const Register = (props) => {
             })
                 .then(res => res.json())
                 .then(res => {
-                    if ("valid" in res && res.valid) {
-                        localStorage.setItem("rare_user_id", res.token)
+                        localStorage.setItem("rare_user_id", res.id)
                         props.history.push("/")
-                    }
                 })
         } else {
             passwordDialog.current.showModal()
@@ -75,7 +73,7 @@ export const Register = (props) => {
                     <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="verifyPassword"> Verify Password </label>
+                    <label htmlFor="bio"> Bio </label>
                     <textarea ref={bio} name="bio" className="form-control" placeholder="Let other gamers know a little bit about you..." />
                 </fieldset>
                 <fieldset style={{
