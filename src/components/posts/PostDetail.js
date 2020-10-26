@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { CommentContext } from '../comments/CommentProvider';
 import { PostContext } from "./PostProvider"
 import "./Posts.css"
 
 export const PostDetail = (props) => {
     const { getSinglePost, parsePostContent } = useContext(PostContext);
+    const {comments, getCommentsByPost} = useContext(CommentContext)
 
     // const postId = useParams();
 
@@ -24,6 +26,11 @@ export const PostDetail = (props) => {
         getSinglePost(postId)
             .then(setPost)
     }, []);
+
+    useEffect(() => {
+        const postId = parseInt(props.match.params.postId)
+        getCommentsByPost(postId)
+    }, [])
 
     return (
         <div className="post">
@@ -61,6 +68,21 @@ export const PostDetail = (props) => {
             </div>
             <div className="post-content">
                 {parsePostContent(post.content).map(paragraph => <p>{paragraph}</p>)}
+            </div>
+            <div>
+                <article className="comments">
+                    <h3>Cesspool of Comments</h3>
+                {
+                    comments.map(com => {
+                        return <section className="comment" key={com.id}>
+                            <div className="comment__subject">Subject: {com.subject}</div>
+                            <div className="comment__content">Comment: {com.content}</div>
+                            <div className="comment__userName">User: {com.user.user_name}</div>
+
+                        </section>
+                    })
+                }
+                </article>
             </div>
         </div>
 

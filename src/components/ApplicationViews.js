@@ -8,6 +8,8 @@ import {CategoryList} from "./categories/CategoryList"
 import {CategoryForm} from "./categories/CategoryForm"
 import {CategoryViewPosts} from "./categories/CategoryPost"
 
+import {CommentProvider} from "./comments/CommentProvider"
+
 
 export const ApplicationViews = (props) => {
     return (
@@ -20,11 +22,13 @@ export const ApplicationViews = (props) => {
         </main>
 
         <PostProvider>
-            <Route exact path="/posts/:postId(\d+)" render={ props => <PostDetail {...props} /> } />
+            <CommentProvider>
+                <Route exact path="/posts/:postId(\d+)" render={ props => <PostDetail {...props} /> } />
 
-            <Route exact path="/">
-                <PostList />
-            </Route>
+                <Route exact path="/">
+                    <PostList />
+                </Route>
+            </CommentProvider>
         </PostProvider>
         
         <PostProvider>
