@@ -6,10 +6,32 @@ export const PostForm = (props) => {
     const { createPost } = useContext( PostContext )
     const { getAllCategories, categories } = useContext( CategoryContext )
 
+    const currentDay = new Date
+    console.log(currentDay)
+
     // Get all the categories to populate the select dropdown
     useEffect(() => {
         getAllCategories()
     }, [])
+
+    // the following state is for compontent state
+    const [post, setPost] = useState({})
+
+    const handleControlledInputChange = (e) => {
+        const newPost = Object.assign({}, post)     // Create a copy
+        newPost[e.target.name] = e.target.value     // Modify copy
+        setPost(newPost)
+    }
+
+    const constructNewPost = () => {
+        const userId = parseInt(localStorage.getItem("rare_user_id"))
+
+        createPost({
+            title: post.title,
+            content: post.content,
+            pubdate: null
+        })
+    }
 
     return (
         <form className="PostForm">
@@ -18,8 +40,17 @@ export const PostForm = (props) => {
                 <div className="form-group">
                     <label htmlFor="title">Title :</label>
                     <input type="text" name="title" required autoFocus className="form-control"
-                        value={null}
-                        onChange={null}
+                        value={post.title}
+                        onChange={handleControlledInputChange}
+                    />
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="content">Content :</label>
+                    <input type="text" name="content" required autoFocus className="form-control"
+                        value={post.content}
+                        onChange={handleControlledInputChange}
                     />
                 </div>
             </fieldset>
@@ -29,7 +60,7 @@ export const PostForm = (props) => {
                     <select name="categoryId" className="form-control"
                         proptype="int"
                         value={null}
-                        onChange={null}>
+                        onChange={handleControlledInputChange}>
 
                             <option value="0">Select a category</option>
                             {categories.map(c => (

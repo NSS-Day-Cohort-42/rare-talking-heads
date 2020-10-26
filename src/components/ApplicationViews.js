@@ -1,5 +1,6 @@
 import React from "react"
 import { Route } from "react-router-dom"
+import { PostDetail } from "./posts/PostDetail"
 import { PostProvider } from "./posts/PostProvider"
 import { PostList } from "./posts/PostList"
 import { PostForm } from "./posts/PostForm"
@@ -10,7 +11,8 @@ import {CategoryForm} from "./categories/CategoryForm"
 
 
 export const ApplicationViews = (props) => {
-    return <>
+    return (
+    <>
         <main style={{
             margin: "5rem 2rem",
             lineHeight: "1.75rem"
@@ -36,6 +38,8 @@ export const ApplicationViews = (props) => {
 
                     </Route>
                 </CategoryProvider>
+            
+            <Route exact path="/posts/:postId(\d+)" render={ props => <PostDetail {...props} /> } />
         </PostProvider>
         {/* Post Section Ends */}
 
@@ -62,5 +66,6 @@ export const ApplicationViews = (props) => {
         
     </>
 
+    )
     
 }

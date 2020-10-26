@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react"
+import { Link } from "react-router-dom"
 import { PostContext } from "./PostProvider"
 import "./Posts.css"
 
@@ -30,7 +31,9 @@ export const PostList = props => {
                                 </span>
                             </div>
                             <div className="post-preview-title">
-                                <h3>{post.title}</h3>
+                                <Link to={`/posts/${post.id}`}>
+                                    <h3>{post.title}</h3>
+                                </Link>
                             </div>
                             <div className = "post-preview-footer">
                                 {post.category_name}
