@@ -3,36 +3,38 @@ import { Link, useHistory } from "react-router-dom"
 import "./Auth.css"
 
 
-export const Login = () => {
+export const Login = (props) => {
     const email = useRef()
     const password = useRef()
     const invalidDialog = useRef()
     const history = useHistory()
 
-    const handleLogin = (e) => {
-        e.preventDefault()
-
-        return fetch("http://127.0.0.1:8088/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                username: email.current.value,
-                password: password.current.value
-            })
-        })
-            .then(res => res.json())
+    const existingUserCheck = () => {
+        return fetch(`http://localhost:8088/users?email=${email.current.value}`)
             .then(res => {
-                if ("valid" in res && res.valid) {
-                    localStorage.setItem("rare_user_id", res.token )
-                    history.push("/")
-                }
-                else {
-                    invalidDialog.current.showModal()
-                }
+                return res.json()
             })
+            .then(user => {
+               return user !== undefined ? user : false
+            })
+
+}
+
+const handleLogin = (e) => {
+    e.preventDefault()
+
+    existingUserCheck()
+        .then(exists => {
+            if (exists && exists.password === password.current.value) {
+                localStorage.setItem("rare_user_id", exists.id)
+                props.history.push("/home")
+            } else if (exists && exists.password !== password.current.value) {
+                invalidDialog.current.showModal()
+            } else if (!exists) {
+                invalidDialog.current.showModal()
+            }
+            
+        })
     }
 
     return (
