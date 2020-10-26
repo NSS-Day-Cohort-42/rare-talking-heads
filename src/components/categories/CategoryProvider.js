@@ -44,6 +44,8 @@ export const CategoryProvider = (props) => {
         }).then(getAllCategories)
     }
 
+    
+
     return (
         <CategoryContext.Provider
             value={{
