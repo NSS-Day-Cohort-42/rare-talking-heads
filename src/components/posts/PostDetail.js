@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { PostContext } from "./PostProvider"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import "./Posts.css"
 
 export const PostDetail = (props) => {
@@ -19,11 +20,21 @@ export const PostDetail = (props) => {
         category_id: 0,
     });
 
+    const [editMode, setEditMode] = useState(false);
+
+    // const currentUser = localStorage.getItem("rare_user_id") === post.id;
+
     useEffect(() => {
         const postId = parseInt(props.match.params.postId);
         getSinglePost(postId)
             .then(setPost)
     }, []);
+
+    useEffect(() => {
+        if (Number(localStorage.getItem("rare_user_id")) === post.id) {
+            setEditMode(true);
+        }
+    }, [post.id])
 
     return (
         <div className="post">
@@ -52,7 +63,7 @@ export const PostDetail = (props) => {
                 </div>
                 <div className="post-info-r">
                     <div className="post-edit-buttons">
-                        {/* edit and delete buttons will go here */}
+                        {editMode ? <FontAwesomeIcon icon={["fas", "trash"]} /> : ''}
                     </div>
                     <div className="post-manage-tags">
                         {/* manage tags button will go here */}
