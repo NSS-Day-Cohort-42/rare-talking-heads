@@ -3,7 +3,7 @@ import React, {useContext} from "react"
 
 import {CategoryContext} from "./CategoryProvider"
 
-export const Category = ( {c}, props) => {
+export const Category = ( {c} ) => {
     const {deleteCategory, getCategoryById } = useContext(CategoryContext)
 
     return (

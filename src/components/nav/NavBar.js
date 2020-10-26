@@ -14,10 +14,10 @@ export const NavBar = () => {
             <li className="navbar__item">
                 <Link className="navbar__link" to="/">Posts</Link>
             </li>
-            <li className="nav-item">
-                            <Link className="nav-link" to="/categories">Categories</Link>
-
+            <li className="navbar__item">
+                <Link className="nav-link" to="/categories">Categories</Link>
             </li>
+            
             {
                 (localStorage.getItem("rare_user_id") !== null) ?
                     <li className="nav-item">
@@ -38,6 +38,9 @@ export const NavBar = () => {
                         </li>
                         
                     </>
-            }        </ul>
+
+            }   
+                
+        </ul>
     )
 }
