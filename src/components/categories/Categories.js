@@ -3,8 +3,8 @@ import React, {useContext} from "react"
 
 import {CategoryContext} from "./CategoryProvider"
 
-export const Category = ({c}) => {
-    const {deleteCategory, getCategoryById} = useContext(CategoryContext)
+export const Category = ( {c}, props) => {
+    const {deleteCategory, getCategoryById } = useContext(CategoryContext)
 
     return (
         <section className="category">
@@ -18,9 +18,10 @@ export const Category = ({c}) => {
             
             <button onClick={
                 () => {
-                    getCategoryById(c.id)
+                   getCategoryById(c.id).then(props.history.push(`/categories/edit/${c.id}`))
+                    
                 }
-            }>Edit Category</button>
+            }> Edit Category</button>
         </section>
     )
 }
