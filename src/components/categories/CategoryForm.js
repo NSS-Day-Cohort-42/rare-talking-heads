@@ -7,6 +7,8 @@ export const CategoryForm = (props) => {
 
     const [editMode, editModeChanged] = useState(false)
 
+    // const toEdit = props.match.params.hasOwnProperty("categoryId")
+
     useEffect(() => {
         if ('id' in category) {
             editModeChanged(true)
@@ -29,11 +31,11 @@ export const CategoryForm = (props) => {
             updatedCategory({
                 id : category.id,
                 name : category.name
-            })
+            }).then(props.history.push("/categories"))
         } else {
             createCategory({
                 name : category.name
-            })
+            }).then(props.history.push("/categories"))
         }
         setCategory({ name : ""})
     }

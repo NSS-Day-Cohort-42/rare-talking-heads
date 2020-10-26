@@ -1,0 +1,31 @@
+.post-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100vw;
+    flex-direction: column;
+}
+
+.post-preview {
+    width: 90%;
+    border: 1px solid black;
+    margin: 15px;
+    padding: 5px;
+}
+
+.post-preview-header {
+    width: 100%;
+    font-size: 0.7rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-preview-title {
+    text-align: center;
+}
+
+.post-preview-footer {
+    width: 100%;
+    font-size: 0.7rem;
+    text-align: end;
+}
