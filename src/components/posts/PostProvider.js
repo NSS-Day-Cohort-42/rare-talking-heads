@@ -11,12 +11,21 @@ export const PostProvider = (props) => {
             .then(setPosts)
     }
 
+
+    const getPostsByCat = (category_id) => {
+        return fetch(`http://localhost:8088/posts?category_id=${category_id}`)
+            .then(r => r.json())
+            .then(setPosts)
+    }
+
     return (
         <PostContext.Provider value={{
-            posts, getAllPosts
+            posts, getAllPosts, getPostsByCat
         }}>
             {props.children}
         </PostContext.Provider>
     )
+
+
 
 };
