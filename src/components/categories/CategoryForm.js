@@ -22,6 +22,10 @@ export const CategoryForm = (props) => {
         }
     }, [category])
 
+    // const catToEdit =() => {
+    //     const categoryId = parseInt(props.match.params.categoryId)
+    //     const selectedCat = categories.find
+    // })
     
 
     const handleChange = (e) => {

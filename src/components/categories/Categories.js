@@ -16,12 +16,12 @@ export const Category = ( {c}, props) => {
             }
             }>Delete Category</button>
             
-            <button onClick={
+            {/* <button onClick={
                 () => {
-                   getCategoryById(c.id).then(props.history.push(`/categories/edit/${c.id}`))
+                   props.history.push(`/categories/edit/${c.id}`)
                     
                 }
-            }> Edit Category</button>
+            }> Edit Category</button> */}
         </section>
     )
 }
