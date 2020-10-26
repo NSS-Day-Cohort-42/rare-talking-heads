@@ -6,6 +6,7 @@ import { PostList } from "./posts/PostList"
 import {CategoryProvider} from "./categories/CategoryProvider"
 import {CategoryList} from "./categories/CategoryList"
 import {CategoryForm} from "./categories/CategoryForm"
+import {CategoryViewPosts} from "./categories/CategoryPost"
 
 
 export const ApplicationViews = (props) => {
@@ -26,23 +27,29 @@ export const ApplicationViews = (props) => {
             </Route>
         </PostProvider>
         
-        <CategoryProvider>
-                <Route exact path = "/categories" render={
-                    props => {
-                        return <CategoryList history={props.history} />
-                    }
-                } />
+        <PostProvider>
+            <CategoryProvider>
+                    <Route exact path = "/categories" render={
+                        props => {
+                            return <CategoryList history={props.history} />
+                        }
+                    } />
 
-                <Route exact path ="/categories/create" render={
-                    props => {
-                        return <CategoryForm {...props} />
-                    }
-                } />
+                    <Route exact path ="/categories/create" render={
+                        props => {
+                            return <CategoryForm {...props} />
+                        }
+                    } />
 
-                <Route exact path="/categories/edit/:categoryId(\d+)" render={
-                    props => <CategoryForm {...props} />
-                } />
-        </CategoryProvider>
+                    <Route exact path="/categories/edit/:categoryId(\d+)" render={
+                        props => <CategoryForm {...props} />
+                    } />
+
+                    <Route exact path="/posts/category/:categoryId(\d+)" render={
+                        props => <CategoryViewPosts {...props} />
+                    } />
+            </CategoryProvider>
+        </PostProvider>
         
         
     </>

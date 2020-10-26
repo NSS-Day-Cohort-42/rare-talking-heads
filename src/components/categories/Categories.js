@@ -1,6 +1,8 @@
 
 import React, {useContext} from "react"
 
+import {Link} from "react-router-dom"
+
 import {CategoryContext} from "./CategoryProvider"
 
 export const Category = ( {c} ) => {
@@ -8,7 +10,9 @@ export const Category = ( {c} ) => {
 
     return (
         <section className="category">
-            <div className="category__name">{c.name}</div>
+            <Link to={`/posts/category/${c.id}`}>
+                <div className="category__name">{c.name}</div>
+            </Link>
 
             <button onClick={
                 () => {
