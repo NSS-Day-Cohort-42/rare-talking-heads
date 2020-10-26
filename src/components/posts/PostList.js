@@ -11,14 +11,19 @@ export const PostList = props => {
 
     return (
         <div>
-            <h1>Posts</h1>
 
             <article className = "post-list">
+                <h1>Posts</h1>
+
                 {
                     posts.map(post => {
                         return <section className = "post-preview" key={post.id}>
                             <div className = "post-preview-header">
                                 {post.user_name}
+                                <span className="edit-button">
+                                    {/* temporary space for edit button */}
+                                    edit
+                                </span>
                             </div>
                             <div className="post-preview-title">
                                 <h3>{post.title}</h3>
