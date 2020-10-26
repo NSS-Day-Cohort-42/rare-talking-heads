@@ -24,11 +24,15 @@ export const PostProvider = (props) => {
             .then(res => res.json())
     }
 
+    const deletePost = (postId) => {
+        console.warn("delete", postId)
+    };
+
     const parsePostContent = (content) => content.replaceAll('</p>', '').split('<p>')
 
     return (
         <PostContext.Provider value={{
-            posts, getAllPosts, getSinglePost, parsePostContent, getPostsByCat
+            posts, getAllPosts, getSinglePost, parsePostContent, getPostsByCat, deletePost
         }}>
             {props.children}
         </PostContext.Provider>
