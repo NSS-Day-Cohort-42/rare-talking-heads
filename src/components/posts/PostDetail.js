@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { PostContext } from "./PostProvider"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import "./Posts.css"
 
 export const PostDetail = (props) => {
@@ -63,7 +62,7 @@ export const PostDetail = (props) => {
                 </div>
                 <div className="post-info-r">
                     <div className="post-edit-buttons">
-                        {editMode ? <FontAwesomeIcon icon={["fas", "trash"]} /> : ''}
+                        {editMode ? 'DELETE' : ''}
                     </div>
                     <div className="post-manage-tags">
                         {/* manage tags button will go here */}
