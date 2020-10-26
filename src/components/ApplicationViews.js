@@ -1,8 +1,8 @@
 import React from "react"
 import { Route } from "react-router-dom"
+import { PostDetail } from "./posts/PostDetail"
 import { PostProvider } from "./posts/PostProvider"
 import { PostList } from "./posts/PostList"
-
 import {CategoryProvider} from "./categories/CategoryProvider"
 import {CategoryList} from "./categories/CategoryList"
 import {CategoryForm} from "./categories/CategoryForm"
@@ -10,7 +10,8 @@ import {CategoryViewPosts} from "./categories/CategoryPost"
 
 
 export const ApplicationViews = (props) => {
-    return <>
+    return (
+    <>
         <main style={{
             margin: "5rem 2rem",
             lineHeight: "1.75rem"
@@ -19,9 +20,11 @@ export const ApplicationViews = (props) => {
         </main>
 
         <PostProvider>
-                <Route exact path="/">
-                    <PostList />
-                </Route>
+            <Route exact path="/posts/:postId(\d+)" render={ props => <PostDetail {...props} /> } />
+
+            <Route exact path="/">
+                <PostList />
+            </Route>
         </PostProvider>
         
         <PostProvider>
@@ -51,5 +54,6 @@ export const ApplicationViews = (props) => {
         
     </>
 
+    )
     
 }

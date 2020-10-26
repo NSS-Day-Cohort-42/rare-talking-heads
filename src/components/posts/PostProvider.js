@@ -18,9 +18,17 @@ export const PostProvider = (props) => {
             .then(setPosts)
     }
 
+    
+    const getSinglePost = (postId) => {
+        return fetch(`http://localhost:8088/posts/${postId}`)
+            .then(res => res.json())
+    }
+
+    const parsePostContent = (content) => content.replaceAll('</p>', '').split('<p>')
+
     return (
         <PostContext.Provider value={{
-            posts, getAllPosts, getPostsByCat
+            posts, getAllPosts, getSinglePost, parsePostContent, getPostsByCat
         }}>
             {props.children}
         </PostContext.Provider>
