@@ -13,7 +13,11 @@ export const PostList = props => {
         <div>
 
             <article className = "post-list">
-                <h1>Posts</h1>
+                <h1>Posts</h1> 
+                <button className="addPostBtn"
+                onClick={
+                    () =>
+                     props.history.push("/posts/create")}>Add New Post</button>
 
                 {
                     posts.map(post => {

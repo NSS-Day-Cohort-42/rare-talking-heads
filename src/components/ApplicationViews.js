@@ -2,6 +2,7 @@ import React from "react"
 import { Route } from "react-router-dom"
 import { PostProvider } from "./posts/PostProvider"
 import { PostList } from "./posts/PostList"
+import { PostForm } from "./posts/PostForm"
 
 import {CategoryProvider} from "./categories/CategoryProvider"
 import {CategoryList} from "./categories/CategoryList"
@@ -17,12 +18,28 @@ export const ApplicationViews = (props) => {
             
         </main>
 
+        {/* Post Section Begins */}
         <PostProvider>
-                <Route exact path="/">
-                    <PostList />
+                <Route exact path="/" render={
+                    props => {
+                        return <PostList history={props.history} />}
+                }>
                 </Route>
+
+                {/* When the URL changes to /posts/create render the PostForm */}
+                <CategoryProvider>
+                    <Route exact path="/posts/create" render={
+                        props => {
+                            return <PostForm {...props} />
+                        }
+                    }>
+
+                    </Route>
+                </CategoryProvider>
         </PostProvider>
-        
+        {/* Post Section Ends */}
+
+        {/* Category Section Begins */}
         <CategoryProvider>
                 <Route exact path = "/categories" render={
                     props => {
@@ -40,6 +57,7 @@ export const ApplicationViews = (props) => {
                     props => <CategoryForm {...props} />
                 } />
         </CategoryProvider>
+        {/* Category Section Ends */}
         
         
     </>
