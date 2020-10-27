@@ -23,7 +23,7 @@ export const ApplicationViews = (props) => {
         </main>
 
         <PostProvider>
-            <Route exact path="/posts/:postId(\d+)" render={ props => <PostDetail {...props} /> } />
+            <Route exact path="/posts/:postId(\d+)" render={ props => <PostDetail history={props.history} {...props} /> } />
 
             <Route exact path="/">
                 <PostList />
