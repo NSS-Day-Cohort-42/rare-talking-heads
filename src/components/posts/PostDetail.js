@@ -32,7 +32,7 @@ export const PostDetail = (props) => {
     }, []);
 
     useEffect(() => {
-        if (Number(localStorage.getItem("rare_user_id")) === post.id) {
+        if (Number(localStorage.getItem("rare_user_id")) === post.user_id) {
             setEditMode(true);
         }
     }, [post.id])
@@ -77,7 +77,7 @@ export const PostDetail = (props) => {
             { deleteWarning
             ? <div className="alert alert-danger" role="alert">
                 Are you sure you want to delete this post?
-                <button className = "btn btn-secondary" onClick={() => {deletePost(post.id)}}>Yes, delete</button>
+                <button className = "btn btn-secondary" onClick={() => {deletePost(post.id).then(props.history.push('/'))}}>Yes, delete</button>
                 <button className = "btn btn-secondary" onClick={() => {setDeleteWarning(false)}}>No, cancel</button>
             </div>
             : ''
