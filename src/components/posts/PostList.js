@@ -26,6 +26,10 @@ export const PostList = props => {
 
             <article className = "post-list">
                 <h1>{view === 'myposts' ? 'My ' : ''}Posts</h1>
+                <button className="addPostBtn"
+                onClick={
+                    () =>
+                    props.history.push("/posts/create")}>Add New Post</button>
 
                 {
                     posts.map(post => {
