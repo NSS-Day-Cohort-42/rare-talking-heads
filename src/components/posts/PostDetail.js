@@ -72,6 +72,11 @@ export const PostDetail = (props) => {
             <div>
                 <article className="comments">
                     <h3>Cesspool of Comments</h3>
+                    <div className="addCommentbtn">
+                        <button onClick={
+                            () => props.history.push("/comments/create")
+                        }>Add Comment</button>
+                    </div>
                 {
                     comments.map(com => {
                         return <section className="comment" key={com.id}>
