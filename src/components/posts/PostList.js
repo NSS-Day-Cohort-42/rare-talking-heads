@@ -38,7 +38,9 @@ export const PostList = props => {
                                 {post.user_name}
                                 <span className="edit-button">
                                     {/* temporary space for edit button */}
-                                    edit
+                                    <i class="fas fa-edit"
+                                    style={{cursor:'pointer'}}
+                                    onClick={() => {props.history.push(`/posts/edit/${post.id}`)}}>Edit</i>
                                 </span>
                             </div>
                             <div className="post-preview-title">

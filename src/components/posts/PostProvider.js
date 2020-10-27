@@ -46,6 +46,17 @@ export const PostProvider = (props) => {
             .then(getAllPosts)
     });
 
+    const updatePost = post => {
+        return fetch(`http://localhost:8088/posts/${post.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(post)
+        })
+            .then(getAllPosts)
+    }
+
     const parsePostContent = (content) => content.replaceAll('</p>', '').split('<p>')
 
     return (
@@ -57,7 +68,8 @@ export const PostProvider = (props) => {
             createNewPost,
             getPostsByCat,
             getPostsByUser,
-            deletePost
+            deletePost,
+            updatePost
         }}>
             {props.children}
         </PostContext.Provider>

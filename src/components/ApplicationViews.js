@@ -46,6 +46,14 @@ export const ApplicationViews = (props) => {
                     }
                 }>
                 </Route>
+                
+                {/* When the URL changes to /posts/edit render the PostForm in edit mode */}
+                <Route exact path="/posts/edit/:postId(\d+)" render={
+                    props => {
+                        return <PostForm {...props} />
+                    }
+                }>
+                </Route>
             </CategoryProvider>
         </PostProvider>
         {/* Post Section Ends */}

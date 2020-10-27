@@ -3,7 +3,7 @@ import { PostContext } from "./PostProvider"
 import { CategoryContext } from "../categories/CategoryProvider"
 
 export const PostForm = (props) => {
-    const { createNewPost } = useContext( PostContext )
+    const { createNewPost, updatePost } = useContext( PostContext )
     const { getAllCategories, categories } = useContext( CategoryContext )
 
     // Get all the categories to populate the select dropdown
