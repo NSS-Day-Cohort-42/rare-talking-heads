@@ -4,9 +4,9 @@ import { PostContext } from "./PostProvider"
 import "./Posts.css"
 
 export const PostDetail = (props) => {
-    const { getSinglePost, parsePostContent } = useContext(PostContext);
-    const {comments, getCommentsByPost} = useContext(CommentContext)
     const { getSinglePost, parsePostContent, deletePost } = useContext(PostContext);
+    const {comments, getCommentsByPost} = useContext(CommentContext)
+    
 
     // const postId = useParams();
 
@@ -30,6 +30,7 @@ export const PostDetail = (props) => {
 
     useEffect(() => {
         const postId = parseInt(props.match.params.postId);
+        
         getSinglePost(postId)
             .then(setPost)
     }, []);
@@ -37,6 +38,7 @@ export const PostDetail = (props) => {
     useEffect(() => {
         const postId = parseInt(props.match.params.postId)
         getCommentsByPost(postId)
+        
     }, [])
 
     useEffect(() => {

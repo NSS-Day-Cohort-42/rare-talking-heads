@@ -40,6 +40,11 @@ export const ApplicationViews = (props) => {
                         return <CommentForm {...props} />
                     }
                 } />
+                <Route exact path = "comments/edit/commentId(\d+)" render={
+                    props => {
+                        return <CommentForm {...props} />
+                    }
+                } />
             </CommentProvider>
         </PostProvider>
         
