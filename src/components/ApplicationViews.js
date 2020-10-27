@@ -9,6 +9,9 @@ import {CategoryProvider} from "./categories/CategoryProvider"
 import {CategoryList} from "./categories/CategoryList"
 import {CategoryForm} from "./categories/CategoryForm"
 import {CategoryViewPosts} from "./categories/CategoryPost"
+import { TagProvider } from "./tags/TagProvider"
+import TagList from "./tags/TagList"
+import { TagForm } from "./tags/TagForm"
 
 
 export const ApplicationViews = (props) => {
@@ -23,6 +26,9 @@ export const ApplicationViews = (props) => {
 
         {/* Post Section Begins */}
         <PostProvider>
+            <CategoryProvider>
+                <Route exact path="/posts/:postId(\d+)" render={ props => <PostDetail history={props.history} {...props} /> } />
+                
                 <Route exact path="/" render={
                     props => {
                         return <PostList history={props.history} />}
@@ -30,17 +36,13 @@ export const ApplicationViews = (props) => {
                 </Route>
 
                 {/* When the URL changes to /posts/create render the PostForm */}
-                <CategoryProvider>
                     <Route exact path="/posts/create" render={
                         props => {
                             return <PostForm {...props} />
                         }
                     }>
-
                     </Route>
                 </CategoryProvider>
-            
-            <Route exact path="/posts/:postId(\d+)" render={ props => <PostDetail {...props} /> } />
         </PostProvider>
         {/* Post Section Ends */}
         
@@ -69,8 +71,20 @@ export const ApplicationViews = (props) => {
             </CategoryProvider>
         </PostProvider>
         {/* Category Section Ends */}
-        
-        
+
+        {/* Tag Section Begins */}
+        <TagProvider>
+            <Route exact path = "/tags" render={
+                props => {
+                    return <TagList history={props.history} />
+                }
+            } />
+
+            <Route exact path="/tags/create" render={
+                props => <TagForm {...props} />
+            } />
+        </TagProvider>
+        {/* Tag Section Ends */}
     </>
 
     )
