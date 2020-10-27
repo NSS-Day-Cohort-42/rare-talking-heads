@@ -1,20 +1,31 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { PostContext } from "./PostProvider"
 import "./Posts.css"
 
 export const PostList = props => {
-    const { posts, getAllPosts } = useContext(PostContext)
+    const { posts, getAllPosts, getPostsByUser } = useContext(PostContext)
+
+    const [view, setView] = useState('all')
 
     useEffect(() => {
-        getAllPosts()
+        if (props.match) {
+            if (props.match.path === '/posts/myposts') {
+                const user_id = Number(localStorage.getItem("rare_user_id"));
+                getPostsByUser(user_id);
+                setView('myposts')
+            }
+        }
+        else {
+            getAllPosts()
+        }
     }, [])
 
     return (
         <div>
 
             <article className = "post-list">
-                <h1>Posts</h1>
+                <h1>{view === 'myposts' ? 'My ' : ''}Posts</h1>
 
                 {
                     posts.map(post => {
