@@ -87,3 +87,12 @@
     display: block;
     margin-top: 15px;
 }
+
+#delete-post-button {
+    color: grey;
+}
+
+#delete-post-button:hover {
+    color: red;
+    cursor: pointer;
+}

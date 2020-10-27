@@ -27,11 +27,13 @@ export const ApplicationViews = (props) => {
 
         <PostProvider>
             <CommentProvider>
-                <Route exact path="/posts/:postId(\d+)" render={ props => <PostDetail {...props} /> } />
+                
+                <Route exact path="/posts/:postId(\d+)" render={ props => <PostDetail history={props.history} {...props} /> } />
 
                 <Route exact path="/">
                     <PostList />
                 </Route>
+
 
                 <Route exact path = "/comments/create" render={
                     props => {
