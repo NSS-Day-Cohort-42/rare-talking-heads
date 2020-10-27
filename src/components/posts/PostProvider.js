@@ -27,6 +27,12 @@ export const PostProvider = (props) => {
             .then(setPosts)
     }
 
+    const getPostsByUser = (user_id) => {
+        return fetch(`http://localhost:8088/posts?user_id=${user_id}`)
+            .then(r => r.json())
+            .then(setPosts)
+    }
+
     
     const getSinglePost = (postId) => {
         return fetch(`http://localhost:8088/posts/${postId}`)
@@ -50,6 +56,7 @@ export const PostProvider = (props) => {
             parsePostContent,
             createNewPost,
             getPostsByCat,
+            getPostsByUser,
             deletePost
         }}>
             {props.children}

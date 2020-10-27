@@ -57,6 +57,10 @@ export const ApplicationViews = (props) => {
                 }>
                 </Route>
 
+                <Route exact path="/posts/myposts" render={
+                            props => <PostList {...props} />
+                        } />
+
                 {/* When the URL changes to /posts/create render the PostForm */}
                 <Route exact path="/posts/create" render={
                         props => {
