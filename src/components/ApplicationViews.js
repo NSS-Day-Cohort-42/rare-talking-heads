@@ -3,6 +3,8 @@ import { Route } from "react-router-dom"
 import { PostDetail } from "./posts/PostDetail"
 import { PostProvider } from "./posts/PostProvider"
 import { PostList } from "./posts/PostList"
+import { PostForm } from "./posts/PostForm"
+
 import {CategoryProvider} from "./categories/CategoryProvider"
 import {CategoryList} from "./categories/CategoryList"
 import {CategoryForm} from "./categories/CategoryForm"
@@ -22,14 +24,29 @@ export const ApplicationViews = (props) => {
             
         </main>
 
+        {/* Post Section Begins */}
         <PostProvider>
-            <Route exact path="/posts/:postId(\d+)" render={ props => <PostDetail history={props.history} {...props} /> } />
+            <CategoryProvider>
+                <Route exact path="/posts/:postId(\d+)" render={ props => <PostDetail history={props.history} {...props} /> } />
+                
+                <Route exact path="/" render={
+                    props => {
+                        return <PostList history={props.history} />}
+                }>
+                </Route>
 
-            <Route exact path="/">
-                <PostList />
-            </Route>
+                {/* When the URL changes to /posts/create render the PostForm */}
+                    <Route exact path="/posts/create" render={
+                        props => {
+                            return <PostForm {...props} />
+                        }
+                    }>
+                    </Route>
+                </CategoryProvider>
         </PostProvider>
+        {/* Post Section Ends */}
         
+        {/* Category Section Begins */}
         <PostProvider>
             <CategoryProvider>
                     <Route exact path = "/categories" render={
@@ -53,7 +70,9 @@ export const ApplicationViews = (props) => {
                     } />
             </CategoryProvider>
         </PostProvider>
-        
+        {/* Category Section Ends */}
+
+        {/* Tag Section Begins */}
         <TagProvider>
             <Route exact path = "/tags" render={
                 props => {
@@ -65,7 +84,7 @@ export const ApplicationViews = (props) => {
                 props => <TagForm {...props} />
             } />
         </TagProvider>
-        
+        {/* Tag Section Ends */}
     </>
 
     )
