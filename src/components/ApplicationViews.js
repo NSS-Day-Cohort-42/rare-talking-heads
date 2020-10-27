@@ -7,6 +7,9 @@ import {CategoryProvider} from "./categories/CategoryProvider"
 import {CategoryList} from "./categories/CategoryList"
 import {CategoryForm} from "./categories/CategoryForm"
 import {CategoryViewPosts} from "./categories/CategoryPost"
+import { TagProvider } from "./tags/TagProvider"
+import TagList from "./tags/TagList"
+import { TagForm } from "./tags/TagForm"
 
 
 export const ApplicationViews = (props) => {
@@ -51,6 +54,17 @@ export const ApplicationViews = (props) => {
             </CategoryProvider>
         </PostProvider>
         
+        <TagProvider>
+            <Route exact path = "/tags" render={
+                props => {
+                    return <TagList history={props.history} />
+                }
+            } />
+
+            <Route exact path="/tags/create" render={
+                props => <TagForm {...props} />
+            } />
+        </TagProvider>
         
     </>
 
