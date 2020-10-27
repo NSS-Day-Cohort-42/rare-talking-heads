@@ -3,7 +3,7 @@ import { PostContext } from "./PostProvider"
 import { CategoryContext } from "../categories/CategoryProvider"
 
 export const PostForm = (props) => {
-    const { createPost } = useContext( PostContext )
+    const { createNewPost } = useContext( PostContext )
     const { getAllCategories, categories } = useContext( CategoryContext )
 
     // Get all the categories to populate the select dropdown
@@ -26,12 +26,13 @@ export const PostForm = (props) => {
         const newPostObj = {
             title: post.title,
             content: post.content,
-            pubdate: Date.now,
+            pubdate: Date.now(),
             header_img: post.header_img,
             user_id: parseInt(localStorage.getItem("rare_user_id")),
-            category_id: post.category_id
+            category_id: parseInt(post.category_id)
         }
-        createPost(newPostObj)
+        createNewPost(newPostObj)
+        .then(() => props.history.push("/"))
     }
 
     return (
@@ -66,8 +67,8 @@ export const PostForm = (props) => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="categoryId">Category: </label>
-                    <select name="categoryId" className="form-control"
+                    <label htmlFor="category_id">Category: </label>
+                    <select name="category_id" className="form-control"
                         proptype="int"
                         value={post.category_id}
                         onChange={handleControlledInputChange}>
