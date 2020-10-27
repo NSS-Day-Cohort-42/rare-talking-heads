@@ -11,11 +11,19 @@ export default (props) => {
 
     return (
         <>
-            <article>
+            <h3>
+                Tags
+            </h3>
+            <div className="addTagBtn">
+                <button onClick={() => props.history.push("/tags/create")}>
+                    Create Tag
+                </button>
+            </div>
+            <div className="tags">
                 {tags.map((c) => (
                     <Tag tag={c} key={c.id} />
                 ))}
-            </article>
+            </div>
         </>
     );
 };
