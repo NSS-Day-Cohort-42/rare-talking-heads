@@ -6,13 +6,11 @@ export const PostForm = (props) => {
     const { createPost } = useContext( PostContext )
     const { getAllCategories, categories } = useContext( CategoryContext )
 
-    const currentDay = new Date
-    console.log(currentDay)
-
     // Get all the categories to populate the select dropdown
     useEffect(() => {
         getAllCategories()
     }, [])
+
 
     // the following state is for compontent state
     const [post, setPost] = useState({})
@@ -24,13 +22,16 @@ export const PostForm = (props) => {
     }
 
     const constructNewPost = () => {
-        const userId = parseInt(localStorage.getItem("rare_user_id"))
 
-        createPost({
+        const newPostObj = {
             title: post.title,
             content: post.content,
-            pubdate: null
-        })
+            pubdate: Date.now,
+            header_img: post.header_img,
+            user_id: parseInt(localStorage.getItem("rare_user_id")),
+            category_id: post.category_id
+        }
+        createPost(newPostObj)
     }
 
     return (
@@ -56,10 +57,19 @@ export const PostForm = (props) => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
+                    <label htmlFor="header_img">Header Image URL :</label>
+                    <input type="text" name="header_img" required autoFocus className="form-control"
+                        value={post.header_img}
+                        onChange={handleControlledInputChange}
+                    />
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
                     <label htmlFor="categoryId">Category: </label>
                     <select name="categoryId" className="form-control"
                         proptype="int"
-                        value={null}
+                        value={post.category_id}
                         onChange={handleControlledInputChange}>
 
                             <option value="0">Select a category</option>
@@ -72,7 +82,10 @@ export const PostForm = (props) => {
                 </div>
             </fieldset>
             <button type="submit"
-                onClick={e => {}}
+                onClick={e => {
+                    e.preventDefault()
+                    constructNewPost()
+                }}
                 className="btn btn-form">
                     Save
                 </button>
