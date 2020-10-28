@@ -13,6 +13,9 @@ import { TagProvider } from "./tags/TagProvider"
 import TagList from "./tags/TagList"
 import { TagForm } from "./tags/TagForm"
 
+import {CommentProvider} from "./comments/CommentProvider"
+import {CommentForm} from "./comments/CommentForm"
+
 
 export const ApplicationViews = (props) => {
     return (
@@ -27,7 +30,26 @@ export const ApplicationViews = (props) => {
         {/* Post Section Begins */}
         <PostProvider>
             <CategoryProvider>
+            <CommentProvider>
+                
                 <Route exact path="/posts/:postId(\d+)" render={ props => <PostDetail history={props.history} {...props} /> } />
+
+                
+
+
+                <Route exact path = "/comments/create/:postId(\d+)" render={
+                    props => {
+                        return <CommentForm {...props} />
+                    }
+                } />
+                <Route exact path = "/comments/edit/:commentId(\d+)" render={
+                    props => {
+                        return <CommentForm {...props} />
+                    }
+                } />
+            
+            
+                
                 
                 <Route exact path="/" render={
                     props => {
@@ -41,12 +63,13 @@ export const ApplicationViews = (props) => {
 
                 {/* When the URL changes to /posts/create render the PostForm */}
                 <Route exact path="/posts/create" render={
-                    props => {
-                        return <PostForm {...props} />
-                    }
-                }>
+                        props => {
+                            return <PostForm {...props} />
+                        }
+                    }>
                 </Route>
-            </CategoryProvider>
+                    </CommentProvider>
+                </CategoryProvider>
         </PostProvider>
         {/* Post Section Ends */}
         
