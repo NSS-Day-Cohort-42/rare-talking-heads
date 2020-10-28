@@ -5,7 +5,7 @@ import "./Posts.css"
 
 export const PostDetail = (props) => {
     const { getSinglePost, parsePostContent, deletePost} = useContext(PostContext);
-    const {getCommentsByPost, deleteComment, comments} = useContext(CommentContext)
+    const {getCommentsByPost, deleteComment, comments, setComments} = useContext(CommentContext)
     
    
     // const postId = useParams();
@@ -117,7 +117,9 @@ export const PostDetail = (props) => {
                                 <div className="comment__userName">User: {com.user.user_name}</div>
                                 <button onClick={
                                     () => {
-                                        deleteComment(com)
+                                        const postId = parseInt(props.match.params.postId)
+                                        console.log(postId)
+                                        deleteComment(com).then(props.history.push(`/posts/${postId}`))
                                     }
                                 }>Delete</button>
 

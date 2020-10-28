@@ -21,11 +21,11 @@ export const CommentProvider = props => {
 
     }
 
-    const deleteComment = (c) => {
+    const deleteComment = (c) => new Promise (() => {
         return fetch(`http://localhost:8088/comments/${c.id}`, {
             method : "DELETE"
-        }).then(getCommentsByPost)
-    }
+        }).then(getCommentsByPost(c.post_id))
+    })
  
     return (
         <CommentContext.Provider value={{
