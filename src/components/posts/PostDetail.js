@@ -40,7 +40,7 @@ export const PostDetail = (props) => {
         const postId = parseInt(props.match.params.postId)
         getCommentsByPost(postId)
         
-    },[post])
+    },[])
 
     useEffect(() => {
         if (Number(localStorage.getItem("rare_user_id")) === post.user_id) {
