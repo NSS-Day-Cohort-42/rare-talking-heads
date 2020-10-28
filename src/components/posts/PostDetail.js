@@ -119,7 +119,7 @@ export const PostDetail = (props) => {
                                     () => {
                                         const postId = parseInt(props.match.params.postId)
                                         console.log(postId)
-                                        deleteComment(com).then(props.history.push(`/posts/${postId}`))
+                                        deleteComment(com)
                                     }
                                 }>Delete</button>
 
