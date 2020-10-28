@@ -66,9 +66,10 @@ export const CategoryForm = (props) => {
                     e.preventDefault()
                     makeNewCategory()
                 }}
-                className="btn btn-form">
+                className="btn btn-primary btn-form">
                     {editMode ? "Update" : "Save"}
                 </button>
+                <button className="btn btn-secondary" onClick={() => props.history.push('/categories')}>Cancel</button>
         </form>
     )
 
