@@ -30,7 +30,7 @@ export const ApplicationViews = (props) => {
         {/* Post Section Begins */}
         <PostProvider>
             <CategoryProvider>
-            <CommentProvider>
+                <CommentProvider>
                 
                 <Route exact path="/posts/:postId(\d+)" render={ props => <PostDetail history={props.history} {...props} /> } />
 
@@ -67,6 +67,14 @@ export const ApplicationViews = (props) => {
                             return <PostForm {...props} />
                         }
                     }>
+                </Route>
+                
+                {/* When the URL changes to /posts/edit render the PostForm in edit mode */}
+                <Route exact path="/posts/edit/:postId(\d+)" render={
+                    props => {
+                        return <PostForm {...props} />
+                    }
+                }>
                 </Route>
                     </CommentProvider>
                 </CategoryProvider>
