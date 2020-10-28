@@ -115,6 +115,9 @@ export const PostDetail = (props) => {
                                 <div className="comment__subject">Subject: {com.subject}</div>
                                 <div className="comment__content">Comment: {com.content}</div>
                                 <div className="comment__userName">User: {com.user.user_name}</div>
+                                <button className = "mr-2" onClick={
+                                    () => props.history.push(`/comments/edit/${com.id}`)
+                                }>Edit</button>
                                 <button onClick={
                                     () => {
                                         const postId = parseInt(props.match.params.postId)
