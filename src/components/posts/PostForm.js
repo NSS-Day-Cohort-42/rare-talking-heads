@@ -3,17 +3,37 @@ import { PostContext } from "./PostProvider"
 import { CategoryContext } from "../categories/CategoryProvider"
 
 export const PostForm = (props) => {
-    const { createNewPost } = useContext( PostContext )
+    const { createNewPost, updatePost, getAllPosts, posts } = useContext( PostContext )
     const { getAllCategories, categories } = useContext( CategoryContext )
+
 
     // Get all the categories to populate the select dropdown
     useEffect(() => {
         getAllCategories()
+        getAllPosts()
     }, [])
 
-
+    
+    
     // the following state is for compontent state
     const [post, setPost] = useState({})
+    
+    // is there a URL parameter of postId???
+    const editMode = props.match.params.hasOwnProperty("postId") // true or false
+    
+    useEffect(() => {
+        getPostInEditMode()
+    }, [posts])
+
+    // if in edit mode, get the post that matched the postId
+    const getPostInEditMode = () => {
+        if (editMode) {
+            const postId = parseInt(props.match.params.postId)
+            const postToEdit = posts.find(p => p.id === postId) || {}
+            setPost(postToEdit)
+        }
+    }
+    
 
     const handleControlledInputChange = (e) => {
         const newPost = Object.assign({}, post)     // Create a copy
@@ -22,27 +42,37 @@ export const PostForm = (props) => {
     }
 
     const constructNewPost = () => {
-
-        const newPostObj = {
-            title: post.title,
-            content: post.content,
-            pubdate: Date.now(),
-            header_img: post.header_img,
-            user_id: parseInt(localStorage.getItem("rare_user_id")),
-            category_id: parseInt(post.category_id)
+        if (editMode) {
+            updatePost({
+                id: post.id,
+                title: post.title,
+                content: post.content,
+                header_img: post.header_img,
+                category_id: parseInt(post.category_id)
+            })
+                .then(() => props.history.push("/"))
+        } else {
+            createNewPost({
+                title: post.title,
+                content: post.content,
+                pubdate: Date.now(),
+                header_img: post.header_img,
+                user_id: parseInt(localStorage.getItem("rare_user_id")),
+                category_id: parseInt(post.category_id)
+            })
+                .then(() => props.history.push("/"))
         }
-        createNewPost(newPostObj)
-        .then(() => props.history.push("/"))
     }
 
     return (
         <form className="PostForm">
-            <h3 className="PostForm__header">Create New Post</h3>
+            <h3 className="PostForm__header">{editMode ? "Edit Your Post" : "Create a New Post"}</h3>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="title">Title :</label>
                     <input type="text" name="title" required autoFocus className="form-control"
-                        value={post.title}
+                        placeholder="Post title"
+                        defaultValue={post.title}
                         onChange={handleControlledInputChange}
                     />
                 </div>
@@ -51,7 +81,8 @@ export const PostForm = (props) => {
                 <div className="form-group">
                     <label htmlFor="content">Content :</label>
                     <input type="text" name="content" required autoFocus className="form-control"
-                        value={post.content}
+                        placeholder="Post content"
+                        defaultValue={post.content}
                         onChange={handleControlledInputChange}
                     />
                 </div>
@@ -60,7 +91,8 @@ export const PostForm = (props) => {
                 <div className="form-group">
                     <label htmlFor="header_img">Header Image URL :</label>
                     <input type="text" name="header_img" required autoFocus className="form-control"
-                        value={post.header_img}
+                        placeholder="Post header image URL"
+                        defaultValue={post.header_img}
                         onChange={handleControlledInputChange}
                     />
                 </div>
@@ -88,7 +120,7 @@ export const PostForm = (props) => {
                     constructNewPost()
                 }}
                 className="btn btn-form">
-                    Save
+                    {editMode ? "Save Updates" : "Save New Post"}
                 </button>
         </form>
     )

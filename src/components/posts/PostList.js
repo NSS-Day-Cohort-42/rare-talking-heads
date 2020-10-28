@@ -21,6 +21,8 @@ export const PostList = props => {
         }
     }, [])
 
+    
+
     return (
         <div>
 
@@ -33,13 +35,23 @@ export const PostList = props => {
 
                 {
                     posts.map(post => {
+                        // this function checks to see if the current user has any posts that they wrote
+                        const ableToEdit = () => {
+                            if (parseInt(localStorage.getItem("rare_user_id")) === post.user_id) {
+                                return true
+                            } else {
+                                return false
+                            }
+                        }
                         return <section className = "post-preview" key={post.id}>
                             <div className = "post-preview-header">
                                 {post.user_name}
-                                <span className="edit-button">
-                                    {/* temporary space for edit button */}
-                                    edit
-                                </span>
+                                {ableToEdit() ? (<span className="edit-button"> {/* If user id matches the post.user_id they will be able to edit post */}
+                                    <i className="fas fa-edit"
+                                    style={{cursor:'pointer'}}
+                                    onClick={() => {props.history.push(`/posts/edit/${post.id}`)}}>Edit</i>
+                                </span>) : <span className="edit-button"> </span>}
+                                
                             </div>
                             <div className="post-preview-title">
                                 <Link to={`/posts/${post.id}`}>
