@@ -37,12 +37,12 @@ export const ApplicationViews = (props) => {
                 
 
 
-                <Route exact path = "/comments/create" render={
+                <Route exact path = "/comments/create/:postId(\d+)" render={
                     props => {
                         return <CommentForm {...props} />
                     }
                 } />
-                <Route exact path = "/comments/edit/commentId(\d+)" render={
+                <Route exact path = "/comments/edit/:commentId(\d+)" render={
                     props => {
                         return <CommentForm {...props} />
                     }

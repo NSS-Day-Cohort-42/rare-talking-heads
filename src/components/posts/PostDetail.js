@@ -4,10 +4,10 @@ import { PostContext } from "./PostProvider"
 import "./Posts.css"
 
 export const PostDetail = (props) => {
-    const { getSinglePost, parsePostContent, deletePost } = useContext(PostContext);
-    const {comments, getCommentsByPost} = useContext(CommentContext)
+    const { getSinglePost, parsePostContent, deletePost} = useContext(PostContext);
+    const {getCommentsByPost, deleteComment, comments} = useContext(CommentContext)
     
-
+   
     // const postId = useParams();
 
     const [post, setPost] = useState({
@@ -22,12 +22,13 @@ export const PostDetail = (props) => {
         category_id: 0,
     });
 
+    
     const [editMode, setEditMode] = useState(false);
 
     const [deleteWarning, setDeleteWarning] = useState(false);
 
     // const currentUser = localStorage.getItem("rare_user_id") === post.id;
-
+    
     useEffect(() => {
         const postId = parseInt(props.match.params.postId);
         
@@ -39,13 +40,15 @@ export const PostDetail = (props) => {
         const postId = parseInt(props.match.params.postId)
         getCommentsByPost(postId)
         
-    }, [])
+    },[post])
 
     useEffect(() => {
         if (Number(localStorage.getItem("rare_user_id")) === post.user_id) {
             setEditMode(true);
         }
     }, [post.id])
+
+   
 
     return (
         <div className="post">
@@ -95,27 +98,42 @@ export const PostDetail = (props) => {
             <div className="post-content">
                 {parsePostContent(post.content).map(paragraph => <p>{paragraph}</p>)}
             </div>
-            <div>
-                <article className="comments">
+            
+            
+            <article className="comments">
                     <h3>Cesspool of Comments</h3>
                     <div className="addCommentbtn">
                         <button onClick={
-                            () => props.history.push("/comments/create")
+                            
+                            () => props.history.push(`/comments/create/${props.match.params.postId}`)
                         }>Add Comment</button>
                     </div>
                 {
                     comments.map(com => {
-                        return <section className="comment" key={com.id}>
+                        if(parseInt(localStorage.getItem("rare_user_id")) === com.user_id) {
+                            return <section className="comment" key={com.id}>
+                                <div className="comment__subject">Subject: {com.subject}</div>
+                                <div className="comment__content">Comment: {com.content}</div>
+                                <div className="comment__userName">User: {com.user.user_name}</div>
+                                <button onClick={
+                                    () => {
+                                        deleteComment(com)
+                                    }
+                                }>Delete</button>
+
+                        </section>
+                        } else {
+                            return <section className="comment" key={com.id}>
                             <div className="comment__subject">Subject: {com.subject}</div>
                             <div className="comment__content">Comment: {com.content}</div>
                             <div className="comment__userName">User: {com.user.user_name}</div>
-
-                        </section>
+                            </section>
+                        }
                     })
                 }
                 </article>
             </div>
-        </div>
+        
 
 
     )

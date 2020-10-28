@@ -24,7 +24,7 @@ export const CommentProvider = props => {
     const deleteComment = (c) => {
         return fetch(`http://localhost:8088/comments/${c.id}`, {
             method : "DELETE"
-        })
+        }).then(getCommentsByPost)
     }
  
     return (
