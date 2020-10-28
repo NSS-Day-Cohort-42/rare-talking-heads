@@ -4,6 +4,7 @@ import {CategoryContext} from "./CategoryProvider"
 
 import {Category} from "./Categories"
 
+import "./CategoryList.css"
 export const CategoryList = (props) => {
     const {categories, getAllCategories} = useContext(CategoryContext)
 
@@ -14,12 +15,12 @@ export const CategoryList = (props) => {
 
     return (
         <>
-        <div>
-            <h3>
+        <div className="category-container">
+            <h3 className="category_heading">
                 Categories
             </h3>
             <div className="addCategorybtn">
-                <button onClick={
+                <button className="btn btn-primary" onClick={
                     () => 
                         props.history.push("/categories/create")
                 

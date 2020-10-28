@@ -1,0 +1,12 @@
+.tag-container {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tag {
+    display:flex;
+    padding-top:1.5rem;
+    align-items: baseline;
+    font-size: 1.25rem;
+}

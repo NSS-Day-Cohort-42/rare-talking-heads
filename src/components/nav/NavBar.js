@@ -14,16 +14,16 @@ export const NavBar = () => {
                 </Link>
             </li>
             <li className="navbar__item">
-                <Link className="navbar__link" to="/">Home</Link>
+                <Link className="navbar__link" to="/"><i class="fas fa-home fa-3x"></i></Link>
             </li>
             <li className="navbar__item">
-                <Link className="navbar__link" to="/posts/myposts">My Posts</Link>
+                <Link className="navbar__link" to="/posts/myposts"><button className="btn btn-primary">My Posts</button></Link>
             </li>
             <li className="navbar__item">
-                <Link className="nav-link" to="/categories">Categories</Link>
+                <Link className="nav-link" to="/categories"><button className="btn btn-primary">Categories</button></Link>
             </li>
             <li className="navbar__item">
-                <Link className="nav-link" to="/tags">Tags</Link>
+                <Link className="nav-link" to="/tags"><button className="btn btn-primary">Tags</button></Link>
             </li>
 
             {
@@ -34,7 +34,7 @@ export const NavBar = () => {
                                 localStorage.removeItem("rare_user_id")
                                 history.push({ pathname: "/" })
                             }}
-                        >Logout</button>
+                        ><i class="fas fa-sign-out-alt fa-3x"></i></button>
                     </li>
                      :
                     <>

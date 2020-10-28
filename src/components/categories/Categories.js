@@ -6,7 +6,7 @@ import {Link} from "react-router-dom"
 import {CategoryContext} from "./CategoryProvider"
 
 export const Category = ( {c} ) => {
-    const {deleteCategory, getCategoryById } = useContext(CategoryContext)
+    const {deleteCategory} = useContext(CategoryContext)
 
     return (
         <section className="category">
@@ -14,11 +14,11 @@ export const Category = ( {c} ) => {
                 <div className="category__name">{c.name}</div>
             </Link>
 
-            <button onClick={
+            <button className="btn categoryDeleteBtn" onClick={
                 () => {
                 deleteCategory(c)
             }
-            }>Delete Category</button>
+            }><i className="fas fa-trash-alt fa-sm" id="delete-category-button" size="sm"/></button>
             
             {/* <button onClick={
                 () => {

@@ -17,8 +17,8 @@ export const CommentProvider = props => {
             headers : { "Content-Type" : "application/json "
             },
             body: JSON.stringify(newComment)
-        })
-
+        }).then(() => getCommentsByPost(newComment.post_id))
+            
     }
 
     const updateComment = (commentId, newComment) => {

@@ -38,6 +38,7 @@ export const TagForm = (props) => {
                 className="btn btn-form">
                 Create Tag
             </button>
+            <button className="btn btn-secondary" onClick={() => props.history.push('/tags')}>Cancel</button>
         </form>
     )
 }
