@@ -70,10 +70,14 @@ export const CommentForm = (props) => {
                     e.preventDefault()
                     saveComment()
                 }}
-            className="CommentSaveBtn">
+            className="CommentSaveBtn btn btn-primary">
                 Save Comment
             </button>
-            
+            <button className="btn btn-secondary" onClick={  
+                () => {
+                const postId = parseInt(props.match.params.postId)
+                props.history.push(`/posts/${postId}`)}}
+            >Cancel</button>
         </form>
     )
 

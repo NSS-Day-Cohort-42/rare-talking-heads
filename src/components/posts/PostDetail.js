@@ -103,7 +103,7 @@ export const PostDetail = (props) => {
             <article className="comments">
                     <h3>Cesspool of Comments</h3>
                     <div className="addCommentbtn">
-                        <button onClick={
+                        <button className="btn btn-primary" onClick={
                             
                             () => props.history.push(`/comments/create/${props.match.params.postId}`)
                         }>Add Comment</button>
@@ -115,10 +115,10 @@ export const PostDetail = (props) => {
                                 <div className="comment__subject">Subject: {com.subject}</div>
                                 <div className="comment__content">Comment: {com.content}</div>
                                 <div className="comment__userName">User: {com.user.user_name}</div>
-                                <button className = "mr-2" onClick={
+                                <button className = "mr-2 btn btn-primary" onClick={
                                     () => props.history.push(`/comments/edit/${com.id}`)
                                 }>Edit</button>
-                                <button onClick={
+                                <button className="mr-2 btn btn-danger" onClick={
                                     () => {
                                         const postId = parseInt(props.match.params.postId)
                                         console.log(postId)
