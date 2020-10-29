@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { CommentContext } from '../comments/CommentProvider';
 import { PostContext } from "./PostProvider"
 import "./Posts.css"
+import "../comments/Comment.css"
 
 export const PostDetail = (props) => {
     const { getSinglePost, parsePostContent, deletePost} = useContext(PostContext);
@@ -108,16 +109,23 @@ export const PostDetail = (props) => {
                             () => props.history.push(`/comments/create/${props.match.params.postId}`)
                         }>Add Comment</button>
                     </div>
+                    
                 {
                     comments.map(com => {
                         if(parseInt(localStorage.getItem("rare_user_id")) === com.user_id) {
-                            return <section className="comment" key={com.id}>
-                                <div className="comment__subject">Subject: {com.subject}</div>
-                                <div className="comment__content">Comment: {com.content}</div>
-                                <div className="comment__userName">User: {com.user.user_name}</div>
+                            return <section className="comment card w-50 border-primary" key={com.id}>
+                                
+                                <div className="comment__subject card-header">{com.subject}</div>
+                                <div className="card-body">
+                                <div className="comment__content card-text">{com.content}</div>
+                                </div>
+                                <div className="card-footer">
+                                <div className="comment__userName card-text"><small className="text-muted">{com.user.user_name}</small></div>
+                                
                                 <button className = "mr-2 btn btn-primary" onClick={
                                     () => props.history.push(`/comments/edit/${com.id}`)
                                 }>Edit</button>
+                                
                                 <button className="mr-2 btn btn-danger" onClick={
                                     () => {
                                         const postId = parseInt(props.match.params.postId)
@@ -125,17 +133,22 @@ export const PostDetail = (props) => {
                                         deleteComment(com)
                                     }
                                 }>Delete</button>
-
+                                </div>
                         </section>
                         } else {
-                            return <section className="comment" key={com.id}>
-                            <div className="comment__subject">Subject: {com.subject}</div>
-                            <div className="comment__content">Comment: {com.content}</div>
-                            <div className="comment__userName">User: {com.user.user_name}</div>
+                            return <section className="comment card w-50 border-secondary" key={com.id}>
+                            <div className="comment__subject card-header">{com.subject}</div>
+                            <div className="card-body">
+                            <div className="comment__content">{com.content}</div>
+                            </div>
+                            <div className="card-footer">
+                            <div className="comment__userName card-text"><small className="text-muted">{com.user.user_name}</small></div>
+                            </div>
                             </section>
                         }
                     })
                 }
+                
                 </article>
             </div>
         
