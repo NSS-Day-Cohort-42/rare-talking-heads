@@ -6,9 +6,12 @@
 
 .category {
     display:flex;
-    padding-top:1.5rem;
+    margin-top:2rem;
     align-items: baseline;
-    font-size: 1.25rem;
+    font-size:1.5rem;
+    padding:1.5rem;
+    
+    
 }
 
 #delete-category-button:hover{
