@@ -28,8 +28,7 @@ export const CategoryList = (props) => {
                 </button>
             </div>
             <div className="categories">
-                {
-                  
+                  {
                     categories.map(c => {
                     return <Category key={c.id} c={c} />
      })
