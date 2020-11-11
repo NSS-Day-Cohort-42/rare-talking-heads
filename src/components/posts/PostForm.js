@@ -47,7 +47,7 @@ export const PostForm = (props) => {
                 id: post.id,
                 title: post.title,
                 content: post.content,
-                header_img: post.header_img,
+                image_url: post.image_url,
                 category_id: parseInt(post.category_id)
             })
                 .then(() => props.history.push("/"))
@@ -55,9 +55,9 @@ export const PostForm = (props) => {
             createNewPost({
                 title: post.title,
                 content: post.content,
-                pubdate: Date.now(),
-                header_img: post.header_img,
-                user_id: parseInt(localStorage.getItem("rare_user_id")),
+                publication_date: Date.now(),
+                image_url: post.image_url,
+                author_id: 6,
                 category_id: parseInt(post.category_id)
             })
                 .then(() => props.history.push("/"))
@@ -108,7 +108,7 @@ export const PostForm = (props) => {
                             <option value="0">Select a category</option>
                             {categories.map(c => (
                                 <option key={c.id} value={c.id}>
-                                    {c.name}
+                                    {c.label}
                                 </option>
                             ))}
                         </select>
