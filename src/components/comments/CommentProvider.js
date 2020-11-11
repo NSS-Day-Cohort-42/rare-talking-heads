@@ -6,13 +6,13 @@ export const CommentProvider = props => {
     const [comments, setComments] = useState([])
 
     const getCommentsByPost = (post_id) => {
-        return fetch(`http://localhost:8088/comments?post_id=${post_id}`)
+        return fetch(`http://localhost:8000/comments?post_id=${post_id}`)
         .then(r => r.json())
         .then(setComments)
     }
 
     const createComment = (newComment) => {
-        return fetch("http://localhost:8088/comments", {
+        return fetch("http://localhost:8000/comments", {
             method: "POST",
             headers : { "Content-Type" : "application/json "
             },
@@ -22,7 +22,7 @@ export const CommentProvider = props => {
     }
 
     const updateComment = (commentId, newComment) => {
-        return fetch(`http://localhost:8088/comments/${commentId}`, {
+        return fetch(`http://localhost:8000/comments/${commentId}`, {
             method: "PUT",
             headers : { "Content-Type" : "application/json "
             },
@@ -32,14 +32,14 @@ export const CommentProvider = props => {
     }
 
     const deleteComment = (com) =>  {
-        fetch(`http://localhost:8088/comments/${com.id}`, {
+        fetch(`http://localhost:8000/comments/${com.id}`, {
             method : "DELETE"
         }).then(() => getCommentsByPost(com.post_id))
             return
     }
 
     const getComment = (commentId) => {
-        return fetch(`http://localhost:8088/comments/${commentId}`)
+        return fetch(`http://localhost:8000/comments/${commentId}`)
             .then(res => res.json())
     }
  

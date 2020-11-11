@@ -6,13 +6,13 @@ export const PostProvider = (props) => {
     const [posts, setPosts] = useState([])
 
     const getAllPosts = () => {
-        return fetch("http://localhost:8088/posts")
+        return fetch("http://localhost:8000/posts")
             .then(res => res.json())
             .then(setPosts)
     }
 
     const createNewPost = (newPost) => {
-        return fetch("http://localhost:8088/posts", {
+        return fetch("http://localhost:8000/posts", {
             method: "POST",
             headers: { "Content-Type": "application/json"
          },
@@ -22,32 +22,32 @@ export const PostProvider = (props) => {
 
 
     const getPostsByCat = (category_id) => {
-        return fetch(`http://localhost:8088/posts?category_id=${category_id}`)
+        return fetch(`http://localhost:8000/posts?category_id=${category_id}`)
             .then(r => r.json())
             .then(setPosts)
     }
 
     const getPostsByUser = (user_id) => {
-        return fetch(`http://localhost:8088/posts?user_id=${user_id}`)
+        return fetch(`http://localhost:8000/posts?user_id=${user_id}`)
             .then(r => r.json())
             .then(setPosts)
     }
 
     
     const getSinglePost = (postId) => {
-        return fetch(`http://localhost:8088/posts/${postId}`)
+        return fetch(`http://localhost:8000/posts/${postId}`)
             .then(res => res.json())
     }
     
     const deletePost = (postId) => new Promise(() => {
-        fetch(`http://localhost:8088/posts/${postId}`, {
+        fetch(`http://localhost:8000/posts/${postId}`, {
             method: "DELETE"
         })
             .then(getAllPosts)
     });
 
     const updatePost = post => {
-        return fetch(`http://localhost:8088/posts/${post.id}`, {
+        return fetch(`http://localhost:8000/posts/${post.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

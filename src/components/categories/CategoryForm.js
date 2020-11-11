@@ -39,14 +39,14 @@ export const CategoryForm = (props) => {
         if(editMode) {
             updatedCategory({
                 id : category.id,
-                name : category.name
+                label : category.label
             }).then(props.history.push("/categories"))
         } else {
             createCategory({
-                name : category.name
+                label : category.label
             }).then(props.history.push("/categories"))
         }
-        setCategory({ name : ""})
+        setCategory({ label : ""})
     }
 
     return (
@@ -54,9 +54,9 @@ export const CategoryForm = (props) => {
             <h3 className="CategoryForm__title">{editMode ? "Update Category" : "Create Category"}</h3>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="name">Name :</label>
-                    <input type="text" name="name" required autoFocus className="form-control"
-                        value={category.name}
+                    <label htmlFor="label">Name :</label>
+                    <input type="text" name="label" required autoFocus className="form-control"
+                        value={category.label}
                         onChange={handleChange}
                     />
                 </div>
