@@ -57,8 +57,8 @@ export const PostForm = (props) => {
                 content: post.content,
                 publication_date: Date.now(),
                 image_url: post.image_url,
-                author_id: 6,
-                category_id: parseInt(post.category_id)
+                category_id: parseInt(post.category_id),
+                approved: true
             })
                 .then(() => props.history.push("/"))
         }
@@ -92,7 +92,7 @@ export const PostForm = (props) => {
                     <label htmlFor="header_img">Header Image URL :</label>
                     <input type="text" name="header_img" required autoFocus className="form-control"
                         placeholder="Post header image URL"
-                        defaultValue={post.header_img}
+                        defaultValue={post.image_url}
                         onChange={handleControlledInputChange}
                     />
                 </div>
