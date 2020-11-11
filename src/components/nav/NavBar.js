@@ -1,10 +1,16 @@
-import React from "react"
+import React, { useContext } from "react"
 import { Link, useHistory } from "react-router-dom"
+
+import { ProfileContext } from "../auth/AuthProvider"
+
 import "./NavBar.css"
 import Logo from "./rare.jpeg"
 
 export const NavBar = () => {
     const history = useHistory()
+
+    const { isAdmin } = useContext(ProfileContext)
+
 
     return (
         <ul className="navbar">
@@ -19,9 +25,14 @@ export const NavBar = () => {
             <li className="navbar__item">
                 <Link className="navbar__link" to="/posts/myposts"><button className="btn btn-primary">My Posts</button></Link>
             </li>
-            <li className="navbar__item">
-                <Link className="nav-link" to="/categories"><button className="btn btn-primary">Categories</button></Link>
-            </li>
+            {
+                isAdmin
+                ?   <li className="navbar__item">
+                        <Link className="nav-link" to="/categories"><button className="btn btn-primary">Category Manager</button></Link>
+                    </li>
+                : ''
+            }
+
             <li className="navbar__item">
                 <Link className="nav-link" to="/tags"><button className="btn btn-primary">Tags</button></Link>
             </li>
