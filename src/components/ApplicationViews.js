@@ -1,5 +1,8 @@
 import React from "react"
 import { Route } from "react-router-dom"
+
+// import { ProfileProvider } from "./auth/AuthProvider"
+
 import { PostDetail } from "./posts/PostDetail"
 import { PostProvider } from "./posts/PostProvider"
 import { PostList } from "./posts/PostList"
@@ -61,66 +64,87 @@ export const ApplicationViews = (props) => {
                 <Route exact path="/posts/myposts" render={
                             props => <PostList {...props} />
                         } />
+                        <Route exact path = "/comments/edit/:commentId(\d+)" render={
+                            props => {
+                                return <CommentForm {...props} />
+                            }
+                        } />
+                    
+                    
+                        
+                        
+                        <Route exact path="/" render={
+                            props => {
+                                return <PostList history={props.history} />}
+                        }>
+                        </Route>
 
-                {/* When the URL changes to /posts/create render the PostForm */}
-                <Route exact path="/posts/create" render={
-                        props => {
-                            return <PostForm {...props} />
-                        }
-                    }>
-                </Route>
+                        <Route exact path="/posts/myposts" render={
+                                    props => <PostList {...props} />
+                                } />
+
+                        {/* When the URL changes to /posts/create render the PostForm */}
+                        <Route exact path="/posts/create" render={
+                                props => {
+                                    return <PostForm {...props} />
+                                }
+                            }>
+                        </Route>
+                        
+                        {/* When the URL changes to /posts/edit render the PostForm in edit mode */}
+                        <Route exact path="/posts/edit/:postId(\d+)" render={
+                            props => {
+                                return <PostForm {...props} />
+                            }
+                        }>
+                        </Route>
+                            </CommentProvider>
+                        </CategoryProvider>
+                </PostProvider>
+                {/* Post Section Ends */}
                 
-                {/* When the URL changes to /posts/edit render the PostForm in edit mode */}
-                <Route exact path="/posts/edit/:postId(\d+)" render={
-                    props => {
-                        return <PostForm {...props} />
-                    }
-                }>
-                </Route>
-                    </CommentProvider>
-                </CategoryProvider>
-        </PostProvider>
-        {/* Post Section Ends */}
+                {/* Category Section Begins */}
+                <PostProvider>
+                    <CategoryProvider>
+                            <Route exact path = "/categories" render={
+                                props => {
+                                    return <CategoryList history={props.history} />
+                                }
+                            } />
+
+                            <Route exact path ="/categories/create" render={
+                                props => {
+                                    return <CategoryForm {...props} />
+                                }
+                            } />
+
+                            <Route exact path="/categories/edit/:categoryId(\d+)" render={
+                                props => <CategoryForm {...props} />
+                            } />
+
+                            <Route exact path="/posts/category/:categoryId(\d+)" render={
+                                props => <CategoryViewPosts {...props} />
+                            } />
+                    </CategoryProvider>
+                </PostProvider>
+                {/* Category Section Ends */}
+
+                {/* Tag Section Begins */}
+                <TagProvider>
+                    <Route exact path = "/tags" render={
+                        props => {
+                            return <TagList history={props.history} />
+                        }
+                    } />
+
+                    <Route exact path="/tags/create" render={
+                        props => <TagForm {...props} />
+                    } />
+                </TagProvider>
+                {/* Tag Section Ends */}
+
+            {/* </ProfileProvider> */}
         
-        {/* Category Section Begins */}
-        <PostProvider>
-            <CategoryProvider>
-                    <Route exact path = "/categories" render={
-                        props => {
-                            return <CategoryList history={props.history} />
-                        }
-                    } />
-
-                    <Route exact path ="/categories/create" render={
-                        props => {
-                            return <CategoryForm {...props} />
-                        }
-                    } />
-
-                    <Route exact path="/categories/edit/:categoryId(\d+)" render={
-                        props => <CategoryForm {...props} />
-                    } />
-
-                    <Route exact path="/posts/category/:categoryId(\d+)" render={
-                        props => <CategoryViewPosts {...props} />
-                    } />
-            </CategoryProvider>
-        </PostProvider>
-        {/* Category Section Ends */}
-
-        {/* Tag Section Begins */}
-        <TagProvider>
-            <Route exact path = "/tags" render={
-                props => {
-                    return <TagList history={props.history} />
-                }
-            } />
-
-            <Route exact path="/tags/create" render={
-                props => <TagForm {...props} />
-            } />
-        </TagProvider>
-        {/* Tag Section Ends */}
     </>
 
     )

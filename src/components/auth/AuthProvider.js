@@ -4,6 +4,7 @@ export const ProfileContext = React.createContext()
 
 export const ProfileProvider = (props) => {
     const [profile, setProfile] = useState({events:[]})
+    const [isAdmin, setIsAdmin] = useState(false)
 
     const getProfile = () => {
         return fetch("http://localhost:8000/profile", {
@@ -17,7 +18,7 @@ export const ProfileProvider = (props) => {
 
     return (
         <ProfileContext.Provider value={{
-            profile, getProfile
+            profile, getProfile, isAdmin, setIsAdmin
         }}>
             {props.children}
         </ProfileContext.Provider>
