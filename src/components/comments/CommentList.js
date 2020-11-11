@@ -60,6 +60,16 @@ export const CommentList = (props) => {
                             <div className="comment__userName card-text"><small className="text-muted">User: {com.commenter && com.commenter.user.username}</small></div>
                             {/* <div className="comment_profile_img"><small><img src={com.commenter.profile_image_url} /></small></div> */}
                             </div>
+                            <button className="mr-2 btn btn-danger" onClick={
+                                    () => {
+                                        
+                                        
+                                        deleteComment(com)
+                                    }
+                                }>Delete</button>
+                                <button className = "mr-2 btn btn-primary" onClick={
+                                    () => props.history.push(`/comments/edit/${com.id}`)
+                                }>Edit</button>
                             </section>
                         }
                     })

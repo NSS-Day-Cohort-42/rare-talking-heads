@@ -15,6 +15,7 @@ export const CommentForm = (props) => {
     useEffect(() => {
         if (editMode) {
             const commentId = parseInt(props.match.params.commentId);
+            
             getComment(commentId)
                 .then(res => setComment(res))
         }
@@ -23,6 +24,7 @@ export const CommentForm = (props) => {
     const inputHandler = (e) => {
         const newComment = {...comment}    // Create a copy
         newComment[e.target.name] = e.target.value     // Modify copy
+        
         setComment(newComment)
     } 
 
@@ -32,7 +34,9 @@ export const CommentForm = (props) => {
         if(editMode) {
         updateComment(parseInt(props.match.params.commentId), {
             subject : comment.subject,
-            content : comment.content
+            content : comment.content,
+            post_id : comment.post_id,
+            created_on : comment.created_on
         })
         .then(props.history.push(`/comments/post/${comment.post_id}`))
 
