@@ -7,18 +7,18 @@ export const TagProvider = (props) => {
     const [tag, setTag] = useState([]);
     
     const getTags = () => {
-        return fetch(`http://localhost:8088/tags`)
+        return fetch(`http://localhost:8000/tags`)
         .then((res) => res.json())
         .then(setTags);
     };
 
     const getTagById = id => {
-        return fetch(`http:localhost:8088/tags/${id}`)
+        return fetch(`http:localhost:8000/tags/${id}`)
         .then(r => r.json())
         .then(setTag)
     }
     const createTag = (newTag) => {
-        return fetch(`http://localhost:8088/tags`, {
+        return fetch(`http://localhost:8000/tags`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -28,13 +28,13 @@ export const TagProvider = (props) => {
     };
 
     const deleteTag = (c) => {
-        return fetch(`http://localhost:8088/tags/${c.id}`, {
+        return fetch(`http://localhost:8000/tags/${c.id}`, {
             method : "DELETE"
         }).then(getTags)
     }
 
     const updatedTag = (c) => {
-        return fetch(`http://localhost:8088/tags/${c.id}`, {
+        return fetch(`http://localhost:8000/tags/${c.id}`, {
             method : "PUT",
             headers : {
                 "Content-Type" : "application/json"
