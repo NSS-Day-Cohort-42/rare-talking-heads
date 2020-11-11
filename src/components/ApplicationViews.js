@@ -15,6 +15,7 @@ import { TagForm } from "./tags/TagForm"
 
 import {CommentProvider} from "./comments/CommentProvider"
 import {CommentForm} from "./comments/CommentForm"
+import {CommentList} from "./comments/CommentList"
 
 
 export const ApplicationViews = (props) => {
@@ -48,7 +49,7 @@ export const ApplicationViews = (props) => {
                     }
                 } />
             
-            
+                <Route exact path = "/comments/post/:postId(\d+)" render={props => <CommentList history={props.history}{...props} /> } />
                 
                 
                 <Route exact path="/" render={

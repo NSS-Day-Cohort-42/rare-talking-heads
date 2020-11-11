@@ -34,15 +34,15 @@ export const CommentForm = (props) => {
             subject : comment.subject,
             content : comment.content
         })
-        .then(props.history.push(`/posts/${comment.post_id}`))
+        .then(props.history.push(`/comments/post/${comment.post_id}`))
 
         } else {
         createComment({
             subject : comment.subject,
             content : comment.content,
-            user_id : parseInt(localStorage.getItem("rare_user_id")),
+            // user_id : parseInt(localStorage.getItem("rare_user_id")),
             post_id : parseInt(props.match.params.postId)
-        }).then(props.history.push(`/posts/${props.match.params.postId}`)) 
+        }).then(props.history.push(`/comments/post/${props.match.params.postId}`))
         }
 
     }

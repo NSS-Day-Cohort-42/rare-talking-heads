@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { CommentContext } from '../comments/CommentProvider';
+// import { CommentContext } from '../comments/CommentProvider';
 import { PostContext } from "./PostProvider"
 import "./Posts.css"
 import "../comments/Comment.css"
 
 export const PostDetail = (props) => {
     const { getSinglePost, parsePostContent, deletePost} = useContext(PostContext);
-    const {getCommentsByPost, deleteComment, comments, setComments} = useContext(CommentContext)
+    // const {getCommentsByPost, deleteComment, comments, setComments} = useContext(CommentContext)
     
    
     // const postId = useParams();
@@ -37,11 +37,11 @@ export const PostDetail = (props) => {
             .then(setPost)
     }, []);
 
-    useEffect(() => {
-        const postId = parseInt(props.match.params.postId)
-        getCommentsByPost(postId)
+    // useEffect(() => {
+    //     const postId = parseInt(props.match.params.postId)
+    //     getCommentsByPost(postId)
         
-    },[])
+    // },[])
 
     useEffect(() => {
         if (Number(localStorage.getItem("rare_user_id")) === post.user_id) {
@@ -99,9 +99,16 @@ export const PostDetail = (props) => {
             <div className="post-content">
                 {parsePostContent(post.content).map(paragraph => <p>{paragraph}</p>)}
             </div>
+            <div className="viewCommentBtn btn">
+            <button className="btn btn-primary" onClick={
+                            
+                            () => props.history.push(`/comments/post/${props.match.params.postId}`)
+                        }>View Comments</button>
+            </div>
+        </div>
             
             
-            <article className="comments">
+            /* <article className="comments">
                     <h3>Cesspool of Comments</h3>
                     <div className="addCommentbtn">
                         <button className="btn btn-primary" onClick={
@@ -150,7 +157,7 @@ export const PostDetail = (props) => {
                 }
                 
                 </article>
-            </div>
+            </div> */
         
 
 
