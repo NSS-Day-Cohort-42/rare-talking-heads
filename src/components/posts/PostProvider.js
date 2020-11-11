@@ -5,8 +5,15 @@ export const PostContext = React.createContext()
 export const PostProvider = (props) => {
     const [posts, setPosts] = useState([])
 
+    const token = localStorage.getItem("rare_user_id")
+
     const getAllPosts = () => {
-        return fetch("http://localhost:8000/posts")
+        return fetch("http://localhost:8000/posts", {
+            method: "GET",
+            headers: {
+                "Authorization": `Token ${token}`
+            }
+        })
             .then(res => res.json())
             .then(setPosts)
     }
