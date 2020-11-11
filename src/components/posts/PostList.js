@@ -37,7 +37,7 @@ export const PostList = props => {
                     posts.map(post => {
                         // this function checks to see if the current user has any posts that they wrote
                         const ableToEdit = () => {
-                            if (parseInt(localStorage.getItem("rare_user_id")) === post.user_id) {
+                            if (parseInt(localStorage.getItem("rare_user_id")) === "6ce5046eef0c08e039c9043b996ba5098447df7b") {
                                 return true
                             } else {
                                 return false
@@ -45,7 +45,7 @@ export const PostList = props => {
                         }
                         return <section className = "post-preview" key={post.id}>
                             <div className = "post-preview-header">
-                                {post.user_name}
+                                By: {post.author.user.first_name} {post.author.user.last_name}
                                 {ableToEdit() ? (<span className="edit-button"> {/* If user id matches the post.user_id they will be able to edit post */}
                                     <i className="fas fa-edit"
                                     style={{cursor:'pointer'}}
@@ -59,7 +59,7 @@ export const PostList = props => {
                                 </Link>
                             </div>
                             <div className = "post-preview-footer">
-                                {post.category_name}
+                                Category: {post.category.label}
                             </div>
                         </section>
                     })
