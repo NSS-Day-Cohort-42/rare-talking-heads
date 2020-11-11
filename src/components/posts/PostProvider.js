@@ -42,7 +42,12 @@ export const PostProvider = (props) => {
 
     
     const getSinglePost = (postId) => {
-        return fetch(`http://localhost:8000/posts/${postId}`)
+        return fetch(`http://localhost:8000/posts/${postId}`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Token ${token}`
+            }
+        })
             .then(res => res.json())
     }
     

@@ -48,28 +48,32 @@ export const PostDetail = (props) => {
             setEditMode(true);
         }
     }, [post.id])
-
    
-
     return (
         <div className="post">
-            <img className="post-img-header" src={post.header_img} alt="" />
             <h1 className = "post-title">
                 {post.title}
             </h1>
+            <img className="post-img-header" src={post.image_url} alt="" />
+            <div className="viewCommentBtn text-center">
+                        <button className="btn btn-primary " onClick={
+                            
+                            () => props.history.push(`/comments/create/${props.match.params.postId}`)
+                        }>View Comments</button>
+                    </div>
             <div className="post-info">
                 <div className="post-info-l">
                     <div>
                         <span className="post-author">
-                            {post.user_name}
+                            By: {post.author && post.author.user.username}
                         </span>
                         <span className="post-date">
-                            {post.pubdate}
+                            {post.publication_date}
                         </span>
                     </div>
                     <div>
                         <span className="post-category">
-                            {post.category_name}
+                            {post.category && post.category.label}
                         </span>
                         <span className="post-tags">
                             {/* tags will go here */}
