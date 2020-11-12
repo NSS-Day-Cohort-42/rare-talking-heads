@@ -50,7 +50,7 @@ export const CommentList = (props) => {
             
                 {
                     comments.map(com => {
-                        if(parseInt(localStorage.getItem("user_id")) === com.commenter_id) {
+                        if(com.is_owner === true) {
                             return <section className="comment card w-50 border-primary" key={com.id}>
                                 
                                 <div className="comment__subject card-header">{com.subject}</div>
