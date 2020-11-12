@@ -47,7 +47,7 @@ export const PostForm = (props) => {
                 id: post.id,
                 title: post.title,
                 content: post.content,
-                header_img: post.header_img,
+                image_url: post.image_url,
                 category_id: parseInt(post.category_id)
             })
                 .then(() => props.history.push("/"))
@@ -55,10 +55,10 @@ export const PostForm = (props) => {
             createNewPost({
                 title: post.title,
                 content: post.content,
-                pubdate: Date.now(),
-                header_img: post.header_img,
-                user_id: parseInt(localStorage.getItem("rare_user_id")),
-                category_id: parseInt(post.category_id)
+                publication_date: Date.now(),
+                image_url: post.image_url,
+                category_id: parseInt(post.category_id),
+                approved: true
             })
                 .then(() => props.history.push("/"))
         }
@@ -89,10 +89,10 @@ export const PostForm = (props) => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="header_img">Header Image URL :</label>
-                    <input type="text" name="header_img" required autoFocus className="form-control"
+                    <label htmlFor="image_url">Header Image URL :</label>
+                    <input type="text" name="image_url" required autoFocus className="form-control"
                         placeholder="Post header image URL"
-                        defaultValue={post.header_img}
+                        defaultValue={post.image_url}
                         onChange={handleControlledInputChange}
                     />
                 </div>
@@ -108,7 +108,7 @@ export const PostForm = (props) => {
                             <option value="0">Select a category</option>
                             {categories.map(c => (
                                 <option key={c.id} value={c.id}>
-                                    {c.name}
+                                    {c.label}
                                 </option>
                             ))}
                         </select>
