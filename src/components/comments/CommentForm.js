@@ -11,10 +11,12 @@ export const CommentForm = (props) => {
     const content = useRef(null)
 
     const editMode = props.match.params.hasOwnProperty("commentId") // true or false
+    
 
     useEffect(() => {
         if (editMode) {
             const commentId = parseInt(props.match.params.commentId);
+            
             getComment(commentId)
                 .then(res => setComment(res))
         }
@@ -23,6 +25,7 @@ export const CommentForm = (props) => {
     const inputHandler = (e) => {
         const newComment = {...comment}    // Create a copy
         newComment[e.target.name] = e.target.value     // Modify copy
+        
         setComment(newComment)
     } 
 
@@ -32,17 +35,19 @@ export const CommentForm = (props) => {
         if(editMode) {
         updateComment(parseInt(props.match.params.commentId), {
             subject : comment.subject,
-            content : comment.content
+            content : comment.content,
+            post_id : comment.post_id,
+            created_on : comment.created_on
         })
-        .then(props.history.push(`/posts/${comment.post_id}`))
+        .then(props.history.push(`/comments/post/${comment.post_id}`))
 
         } else {
         createComment({
             subject : comment.subject,
             content : comment.content,
-            user_id : parseInt(localStorage.getItem("rare_user_id")),
+            // user_id : parseInt(localStorage.getItem("rare_user_id")),
             post_id : parseInt(props.match.params.postId)
-        }).then(props.history.push(`/posts/${props.match.params.postId}`)) 
+        }).then(props.history.push(`/comments/post/${props.match.params.postId}`))
         }
 
     }
@@ -65,19 +70,39 @@ export const CommentForm = (props) => {
                     />
                 </div>
             </fieldset>
-            <button type="submit"
-                onClick={e => {
-                    e.preventDefault()
-                    saveComment()
-                }}
-            className="CommentSaveBtn btn btn-primary">
-                Save Comment
-            </button>
-            <button className="btn btn-secondary" onClick={  
-                () => {
-                const postId = parseInt(props.match.params.postId)
-                props.history.push(`/posts/${postId}`)}}
-            >Cancel</button>
+            
+            {
+                
+                editMode ?
+                <div className="buttons">
+                <button type="submit" className="CommentSaveBtn btn btn-primary"
+                    onClick={e => {
+                        e.preventDefault()
+                        saveComment()
+                    }}>Update</button>
+                <button className="btn btn-secondary" 
+                    onClick={() => {
+                        props.history.push(`/comments/post/${comment.post_id}`)}}>
+                Cancel</button>
+                </div>
+                :
+                <div className="buttons">
+                <button type="submit" className="CommentSaveBtn btn btn-primary"
+                    onClick={e => {
+                        e.preventDefault()
+                        saveComment()
+                    }}>Save</button>
+                <button className="btn btn-secondary" 
+                    onClick={() => {
+                        const postId = parseInt(props.match.params.postId)
+                        props.history.push(`/comments/post/${postId}`)}}>
+                Cancel</button>
+                </div>
+
+                 
+            }
+            
+            
         </form>
     )
 

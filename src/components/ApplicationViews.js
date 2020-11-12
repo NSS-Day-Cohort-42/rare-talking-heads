@@ -18,6 +18,7 @@ import { TagForm } from "./tags/TagForm"
 
 import {CommentProvider} from "./comments/CommentProvider"
 import {CommentForm} from "./comments/CommentForm"
+import {CommentList} from "./comments/CommentList"
 
 
 export const ApplicationViews = (props) => {
@@ -27,34 +28,48 @@ export const ApplicationViews = (props) => {
             margin: "5rem 2rem",
             lineHeight: "1.75rem"
         }}>
-            {/* <ProfileProvider> */}
+            
+        </main>
 
-                {/* Post Section Begins */}
-                <PostProvider>
-                    <CategoryProvider>
-                        <CommentProvider>
+        {/* Post Section Begins */}
+        <PostProvider>
+            <CategoryProvider>
+                <CommentProvider>
+                
+                <Route exact path="/posts/:postId(\d+)" render={ props => <PostDetail history={props.history} {...props} /> } />
+
+                
+
+
+                <Route exact path = "/comments/create/:postId(\d+)" render={
+                    props => {
+                        return <CommentForm {...props} />
+                    }
+                } />
+                <Route exact path = "/comments/edit/:commentId(\d+)" render={
+                    props => {
+                        return <CommentForm {...props} />
+                    }
+                } />
+            
+                <Route exact path = "/comments/post/:postId(\d+)" render={props => <CommentList history={props.history}{...props} /> } />
+                
+                
+                <Route exact path="/" render={
+                    props => {
+                        return <PostList history={props.history} />}
+                }>
+                </Route>
+
+                <Route exact path="/posts/myposts" render={
+                            props => <PostList {...props} />
+                        } />
                         
-                        <Route exact path="/posts/:postId(\d+)" render={ props => <PostDetail history={props.history} {...props} /> } />
-
-                        <Route exact path = "/comments/create/:postId(\d+)" render={
-                            props => {
-                                return <CommentForm {...props} />
-                            }
-                        } />
-                        <Route exact path = "/comments/edit/:commentId(\d+)" render={
-                            props => {
-                                return <CommentForm {...props} />
-                            }
-                        } />
                     
                     
                         
                         
-                        <Route exact path="/" render={
-                            props => {
-                                return <PostList history={props.history} />}
-                        }>
-                        </Route>
+                        
 
                         <Route exact path="/posts/myposts" render={
                                     props => <PostList {...props} />
@@ -121,7 +136,7 @@ export const ApplicationViews = (props) => {
                 {/* Tag Section Ends */}
 
             {/* </ProfileProvider> */}
-        </main>
+        
     </>
 
     )
