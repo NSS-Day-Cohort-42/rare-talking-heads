@@ -11,6 +11,7 @@ export const CommentForm = (props) => {
     const content = useRef(null)
 
     const editMode = props.match.params.hasOwnProperty("commentId") // true or false
+    
 
     useEffect(() => {
         if (editMode) {
@@ -69,19 +70,39 @@ export const CommentForm = (props) => {
                     />
                 </div>
             </fieldset>
-            <button type="submit"
-                onClick={e => {
-                    e.preventDefault()
-                    saveComment()
-                }}
-            className="CommentSaveBtn btn btn-primary">
-                Save Comment
-            </button>
-            <button className="btn btn-secondary" onClick={  
-                () => {
-                const postId = parseInt(props.match.params.postId)
-                props.history.push(`/posts/${postId}`)}}
-            >Cancel</button>
+            
+            {
+                
+                editMode ?
+                <div className="buttons">
+                <button type="submit" className="CommentSaveBtn btn btn-primary"
+                    onClick={e => {
+                        e.preventDefault()
+                        saveComment()
+                    }}>Update</button>
+                <button className="btn btn-secondary" 
+                    onClick={() => {
+                        props.history.push(`/comments/post/${comment.post_id}`)}}>
+                Cancel</button>
+                </div>
+                :
+                <div className="buttons">
+                <button type="submit" className="CommentSaveBtn btn btn-primary"
+                    onClick={e => {
+                        e.preventDefault()
+                        saveComment()
+                    }}>Save</button>
+                <button className="btn btn-secondary" 
+                    onClick={() => {
+                        const postId = parseInt(props.match.params.postId)
+                        props.history.push(`/comments/post/${postId}`)}}>
+                Cancel</button>
+                </div>
+
+                 
+            }
+            
+            
         </form>
     )
 

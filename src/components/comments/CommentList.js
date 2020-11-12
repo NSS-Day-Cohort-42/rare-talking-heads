@@ -2,10 +2,19 @@ import React, { useContext, useEffect, useState } from 'react';
 import { CommentContext } from '../comments/CommentProvider';
 
 import "../comments/Comment.css"
+import { PostContext } from '../posts/PostProvider';
 
 
 export const CommentList = (props) => {
     const {getCommentsByPost, deleteComment, comments} = useContext(CommentContext)
+    const {getSinglePost} = useContext(PostContext)
+
+    const [singlePost, setSinglePost] = useState({})
+
+    useEffect(() => {
+        const postId = parseInt(props.match.params.postId)
+        getSinglePost(postId).then(setSinglePost)
+    }, [])
 
 
     useEffect(() => {
@@ -16,7 +25,9 @@ export const CommentList = (props) => {
 
 
     return (
+
         <article className="comments">
+            <h3 className="post__title">Post Title: {singlePost.title}</h3>
             <h3>Cesspool of Comments</h3>
                 <div className="addCommentbtn">
                     <button className="btn btn-primary" onClick={
@@ -58,7 +69,7 @@ export const CommentList = (props) => {
                             </div>
                             <div className="card-footer">
                             <div className="comment__userName card-text"><small className="text-muted">User: {com.commenter && com.commenter.user.username}</small></div>
-                            {/* <div className="comment_profile_img"><small><img src={com.commenter.profile_image_url} /></small></div> */}
+                            <img className="avatar avatar-xs rounded-circle float-right" src={com.commenter.profile_image_url} />
                             </div>
                             <button className="mr-2 btn btn-danger" onClick={
                                     () => {

@@ -58,7 +58,7 @@ export const PostDetail = (props) => {
             <div className="viewCommentBtn text-center">
                         <button className="btn btn-primary " onClick={
                             
-                            () => props.history.push(`/comments/create/${props.match.params.postId}`)
+                            () => props.history.push(`/comments/post/${props.match.params.postId}`)
                         }>View Comments</button>
                     </div>
             <div className="post-info">
@@ -103,12 +103,7 @@ export const PostDetail = (props) => {
             <div className="post-content">
                 {parsePostContent(post.content).map(paragraph => <p>{paragraph}</p>)}
             </div>
-            <div className="viewCommentBtn btn">
-            <button className="btn btn-primary" onClick={
-                            
-                            () => props.history.push(`/comments/post/${props.match.params.postId}`)
-                        }>View Comments</button>
-            </div>
+            
         </div>
             
             
