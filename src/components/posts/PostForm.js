@@ -89,8 +89,8 @@ export const PostForm = (props) => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="header_img">Header Image URL :</label>
-                    <input type="text" name="header_img" required autoFocus className="form-control"
+                    <label htmlFor="image_url">Header Image URL :</label>
+                    <input type="text" name="image_url" required autoFocus className="form-control"
                         placeholder="Post header image URL"
                         defaultValue={post.image_url}
                         onChange={handleControlledInputChange}
