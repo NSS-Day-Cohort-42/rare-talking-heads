@@ -20,7 +20,7 @@ export const CategoryForm = (props) => {
         else {
             editModeChanged(false)
         }
-    }, [category])
+    }, [])
 
     // const catToEdit =() => {
     //     const categoryId = parseInt(props.match.params.categoryId)

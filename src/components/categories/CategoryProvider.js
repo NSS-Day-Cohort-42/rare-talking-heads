@@ -35,7 +35,9 @@ export const CategoryProvider = (props) => {
                 "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
             },
             body: JSON.stringify(newCategory)
-        }).then(getAllCategories)
+        }).then(() => {
+            setCategory({})
+            getAllCategories()})
     }
 
 
@@ -55,6 +57,7 @@ export const CategoryProvider = (props) => {
                 "Content-Type" : "application/json",
                 "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
             },
+            body: JSON.stringify(c)
         }).then(getAllCategories)
     }
 

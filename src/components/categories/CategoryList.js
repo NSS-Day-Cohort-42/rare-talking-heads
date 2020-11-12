@@ -6,7 +6,7 @@ import {Category} from "./Categories"
 
 import "./CategoryList.css"
 export const CategoryList = (props) => {
-    const {categories, getAllCategories, deleteCategory} = useContext(CategoryContext)
+    const {categories, getAllCategories, deleteCategory, setCategory } = useContext(CategoryContext)
     
 
     useEffect(() => {
@@ -45,6 +45,7 @@ export const CategoryList = (props) => {
                                         
                                         <button className="btn categoryEditBtn" onClick={
                                             () => {
+                                            setCategory(c)
                                             props.history.push(`/categories/edit/${c.id}`)
                                                 
                                             }
