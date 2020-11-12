@@ -6,7 +6,7 @@ import {Category} from "./Categories"
 
 import "./CategoryList.css"
 export const CategoryList = (props) => {
-    const {categories, getAllCategories, deleteCategory} = useContext(CategoryContext)
+    const {categories, getAllCategories, deleteCategory, setCategory } = useContext(CategoryContext)
     
 
     useEffect(() => {
@@ -43,12 +43,13 @@ export const CategoryList = (props) => {
                                         }
                                         }><i className="fas fa-trash-alt fa-sm" id="delete-category-button" size="sm"/></button>
                                         
-                                        {/* <button onClick={
+                                        <button className="btn categoryEditBtn" onClick={
                                             () => {
+                                            setCategory(c)
                                             props.history.push(`/categories/edit/${c.id}`)
                                                 
                                             }
-                                        }> Edit Category</button> */}
+                                        }><i className="fas fa-edit fa-sm" id="edit-category-button" size="sm"/></button>
                                     </td>
                                     <td>
                                         <Category key={c.id} c={c} />
