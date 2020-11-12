@@ -23,17 +23,27 @@ export const CommentList = (props) => {
         
     },[])
 
+    
+
 
     return (
 
         <article className="comments">
             <h3 className="post__title">Post Title: {singlePost.title}</h3>
             <h3>Cesspool of Comments</h3>
+                <div className="comment__headerbtn">
                 <div className="addCommentbtn">
                     <button className="btn btn-primary" onClick={
                     
                     () => props.history.push(`/comments/create/${props.match.params.postId}`)
                     }>Add Comment</button>
+                </div>
+                <div className="backToPostDetail">
+                    <button className="btn btn-secondary" onClick={
+                    
+                    () => props.history.push(`/posts/${props.match.params.postId}`)
+                    }>Back To Post</button>
+                </div>
                 </div>
             
                 {
