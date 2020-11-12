@@ -21,7 +21,9 @@ export const PostProvider = (props) => {
     const createNewPost = (newPost) => {
         return fetch("http://localhost:8000/posts", {
             method: "POST",
-            headers: { "Content-Type": "application/json"
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": `Token ${token}`
          },
          body: JSON.stringify(newPost)
         }).then(getAllPosts)
