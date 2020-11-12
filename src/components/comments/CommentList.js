@@ -11,6 +11,8 @@ export const CommentList = (props) => {
 
     const [singlePost, setSinglePost] = useState({})
 
+    
+
     useEffect(() => {
         const postId = parseInt(props.match.params.postId)
         getSinglePost(postId).then(setSinglePost)
@@ -48,7 +50,7 @@ export const CommentList = (props) => {
             
                 {
                     comments.map(com => {
-                        if(parseInt(localStorage.getItem("rare_user_id")) === com.user_id) {
+                        if(parseInt(localStorage.getItem("user_id")) === com.commenter_id) {
                             return <section className="comment card w-50 border-primary" key={com.id}>
                                 
                                 <div className="comment__subject card-header">{com.subject}</div>
@@ -57,7 +59,7 @@ export const CommentList = (props) => {
                                 </div>
                                 <div className="card-footer">
                                 <div className="comment__userName card-text"><small className="text-muted">{com.commenter && com.commenter.user.username}</small></div>
-                                <div className="comment_profile_img">{com.commenter.profile_image_url}</div>
+                                <img className="avatar avatar-xs rounded-circle float-right" src={com.commenter.profile_image_url} />
                                 <button className = "mr-2 btn btn-primary" onClick={
                                     () => props.history.push(`/comments/edit/${com.id}`)
                                 }>Edit</button>
@@ -81,16 +83,7 @@ export const CommentList = (props) => {
                             <div className="comment__userName card-text"><small className="text-muted">User: {com.commenter && com.commenter.user.username}</small></div>
                             <img className="avatar avatar-xs rounded-circle float-right" src={com.commenter.profile_image_url} />
                             </div>
-                            <button className="mr-2 btn btn-danger" onClick={
-                                    () => {
-                                        
-                                        
-                                        deleteComment(com)
-                                    }
-                                }>Delete</button>
-                                <button className = "mr-2 btn btn-primary" onClick={
-                                    () => props.history.push(`/comments/edit/${com.id}`)
-                                }>Edit</button>
+                            
                             </section>
                         }
                     })
