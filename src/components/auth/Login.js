@@ -1,9 +1,13 @@
-import React from "react"
+import React, { useContext } from "react"
 import { Link } from "react-router-dom"
 import "./Auth.css"
 
+import { ProfileContext } from "../auth/AuthProvider"
+
 
 export const Login = props => {
+    const { setIsAdmin } = useContext(ProfileContext)
+
     const email = React.createRef()
     const password = React.createRef()
     const invalidDialog = React.createRef()
@@ -25,10 +29,13 @@ export const Login = props => {
             .then(res => res.json())
             .then(res => {
                 if ("valid" in res && res.valid && "token" in res) {
+                    setIsAdmin(res.isAdmin)
                     localStorage.setItem( "rare_user_id", res.token )
+                    
                     props.history.push("/")
                 }
                 else {
+                    setIsAdmin(false)
                     invalidDialog.current.showModal()
                 }
             })
