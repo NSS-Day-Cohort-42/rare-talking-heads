@@ -32,9 +32,11 @@ export const TagForm = (props) => {
                 label: tag.label
             }).then(props.history.push("/tags"))
         }
-        createTag({
+        else {
+            createTag({
             label : tag.label
         }).then(props.history.push("/tags"))
+        }
     }
 
     return (
