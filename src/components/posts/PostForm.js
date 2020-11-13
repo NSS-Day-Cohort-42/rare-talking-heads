@@ -23,7 +23,7 @@ export const PostForm = (props) => {
     
     useEffect(() => {
         getPostInEditMode()
-    }, [posts])
+    }, [])
 
     // if in edit mode, get the post that matched the postId
     const getPostInEditMode = () => {
@@ -102,7 +102,7 @@ export const PostForm = (props) => {
                     <label htmlFor="category_id">Category: </label>
                     <select name="category_id" className="form-control"
                         proptype="int"
-                        value={post.category_id}
+                        value={post.category && post.category.id}
                         onChange={handleControlledInputChange}>
 
                             <option value="0">Select a category</option>
