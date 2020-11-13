@@ -61,9 +61,7 @@ export const ApplicationViews = (props) => {
                 }>
                 </Route>
 
-                <Route exact path="/posts/myposts" render={
-                            props => <PostList {...props} />
-                        } />
+               
                         
                     
                     
@@ -130,6 +128,10 @@ export const ApplicationViews = (props) => {
                     } />
 
                     <Route exact path="/tags/create" render={
+                        props => <TagForm {...props} />
+                    } />
+
+                    <Route exact path="/tags/edit/:tagId(\d+)" render={
                         props => <TagForm {...props} />
                     } />
                 </TagProvider>

@@ -7,13 +7,21 @@ export const TagProvider = (props) => {
     const [tag, setTag] = useState([]);
     
     const getTags = () => {
-        return fetch(`http://localhost:8000/tags`)
+        return fetch(`http://localhost:8000/tags`, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+            }
+        })
         .then((res) => res.json())
         .then(setTags);
     };
 
     const getTagById = id => {
-        return fetch(`http:localhost:8000/tags/${id}`)
+        return fetch(`http:localhost:8000/tags/${id}`, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+            }
+        })
         .then(r => r.json())
         .then(setTag)
     }
@@ -22,6 +30,7 @@ export const TagProvider = (props) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
             },
             body: JSON.stringify(newTag),
         }).then(getTags);
@@ -29,16 +38,21 @@ export const TagProvider = (props) => {
 
     const deleteTag = (c) => {
         return fetch(`http://localhost:8000/tags/${c.id}`, {
-            method : "DELETE"
+            method : "DELETE",
+            headers:  {
+                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+            },
         }).then(getTags)
     }
 
-    const updatedTag = (c) => {
+    const updateTag = (c) => {
         return fetch(`http://localhost:8000/tags/${c.id}`, {
             method : "PUT",
             headers : {
-                "Content-Type" : "application/json"
+                "Content-Type" : "application/json",
+                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
             },
+            body: JSON.stringify(c),
         }).then(getTags)
     }
 
@@ -51,7 +65,7 @@ export const TagProvider = (props) => {
                 getTags,
                 createTag,
                 getTagById,
-                updatedTag,
+                updateTag,
                 deleteTag
             }}
         >
