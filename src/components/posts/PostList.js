@@ -37,7 +37,7 @@ export const PostList = props => {
                     posts.map(post => {
                         // this function checks to see if the current user has any posts that they wrote
                         const ableToEdit = () => {
-                            if (parseInt(localStorage.getItem("rare_user_id")) === "6ce5046eef0c08e039c9043b996ba5098447df7b") {
+                            if (post.is_owner === true) {
                                 return true
                             } else {
                                 return false

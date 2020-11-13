@@ -55,7 +55,10 @@ export const PostProvider = (props) => {
     
     const deletePost = (postId) => new Promise(() => {
         fetch(`http://localhost:8000/posts/${postId}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "Authorization": `Token ${token}`
+            }
         })
             .then(getAllPosts)
     });
