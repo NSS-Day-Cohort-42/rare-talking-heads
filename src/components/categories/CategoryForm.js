@@ -3,7 +3,7 @@ import React, {useContext, useEffect, useState} from "react"
 import {CategoryContext} from "./CategoryProvider"
 
 export const CategoryForm = (props) => {
-    const {createCategory, updatedCategory, category, setCategory} = useContext(CategoryContext)
+    const {createCategory, updateCategory, category, setCategory} = useContext(CategoryContext)
 
     const [editMode, editModeChanged] = useState(false)
 
@@ -20,7 +20,7 @@ export const CategoryForm = (props) => {
         else {
             editModeChanged(false)
         }
-    }, [category])
+    }, [])
 
     // const catToEdit =() => {
     //     const categoryId = parseInt(props.match.params.categoryId)
@@ -37,7 +37,7 @@ export const CategoryForm = (props) => {
 
     const makeNewCategory = () => {
         if(editMode) {
-            updatedCategory({
+            updateCategory({
                 id : category.id,
                 label : category.label
             }).then(props.history.push("/categories"))
