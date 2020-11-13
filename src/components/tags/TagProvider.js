@@ -45,7 +45,7 @@ export const TagProvider = (props) => {
         }).then(getTags)
     }
 
-    const updatedTag = (c) => {
+    const updateTag = (c) => {
         return fetch(`http://localhost:8000/tags/${c.id}`, {
             method : "PUT",
             headers : {
@@ -63,7 +63,7 @@ export const TagProvider = (props) => {
                 getTags,
                 createTag,
                 getTagById,
-                updatedTag,
+                updateTag,
                 deleteTag
             }}
         >

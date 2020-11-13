@@ -1,11 +1,15 @@
 import React, { useContext, useEffect } from "react";
+
 import Tag from "./Tag";
 import { TagContext } from "./TagProvider";
+import { ProfileContext } from "../auth/AuthProvider"
+
 
 import "./Tags.css"
 
 export default (props) => {
-    const { tags, getTags } = useContext(TagContext);
+    const { tags, getTags, setTag } = useContext(TagContext);
+    const { isAdmin } = useContext(ProfileContext);
 
     useEffect(() => {
         getTags();
@@ -23,9 +27,27 @@ export default (props) => {
                 </button>
             </div>
             <div className="tags">
-                {tags.map((c) => (
-                    <Tag tag={c} key={c.id} />
-                ))}
+                <table>
+                    <tbody>
+                        {tags.map((tag) => (
+                            <tr>
+                                <td>
+                                    {isAdmin 
+                                        ? <button className="btn categoryEditBtn" onClick={
+                                            () => {
+                                            setTag(tag)
+                                            props.history.push(`/tags/edit/${tag.id}`)
+                                            }
+                                            }><i className="fas fa-edit fa-sm" id="edit-category-button" size="sm"/></button>
+                                        : ''}
+                                </td>
+                                <td>
+                                    <Tag tag={tag} key={tag.id} />
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </div>
         </>

@@ -1,9 +1,23 @@
-import React, {useContext, useState} from "react"
+import React, {useContext, useEffect, useState} from "react"
 
 import {TagContext} from "./TagProvider"
 
 export const TagForm = (props) => {
-    const {createTag, tag, setTag} = useContext(TagContext)
+    const {createTag, tag, setTag, updateTag} = useContext(TagContext)
+    const [editMode, setEditMode] = useState(false)
+
+    const toEdit = props.match.params.hasOwnProperty("tagId")
+
+    useEffect(() => {
+        if (toEdit) {
+            setEditMode(true)
+        }
+        else {
+            setEditMode(false)
+        }
+    }, [toEdit])
+
+
 
     const handleChange = (e) => {
         const newTag = Object.assign({}, tag)
@@ -11,7 +25,13 @@ export const TagForm = (props) => {
         setTag(newTag)    
     }
 
-    const makeNewTag = () => {
+    const saveTag = () => {
+        if(editMode) {
+            updateTag({
+                id: tag.id,
+                label: tag.label
+            }).then(props.history.push("/tags"))
+        }
         createTag({
             label : tag.label
         }).then(props.history.push("/tags"))
@@ -33,10 +53,12 @@ export const TagForm = (props) => {
             <button type="submit"
                 onClick={e => {
                     e.preventDefault()
-                    makeNewTag()
+                    saveTag()
                 }}
                 className="btn btn-form">
-                Create Tag
+                {editMode
+                ? 'Update Tag'
+                : 'Create Tag'}
             </button>
             <button className="btn btn-secondary" onClick={() => props.history.push('/tags')}>Cancel</button>
         </form>
