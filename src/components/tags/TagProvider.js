@@ -45,12 +45,14 @@ export const TagProvider = (props) => {
         }).then(getTags)
     }
 
-    const updatedTag = (c) => {
+    const updateTag = (c) => {
         return fetch(`http://localhost:8000/tags/${c.id}`, {
             method : "PUT",
             headers : {
-                "Content-Type" : "application/json"
+                "Content-Type" : "application/json",
+                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
             },
+            body: JSON.stringify(c),
         }).then(getTags)
     }
 
@@ -63,7 +65,7 @@ export const TagProvider = (props) => {
                 getTags,
                 createTag,
                 getTagById,
-                updatedTag,
+                updateTag,
                 deleteTag
             }}
         >
