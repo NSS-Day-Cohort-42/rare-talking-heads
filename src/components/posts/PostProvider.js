@@ -80,6 +80,18 @@ export const PostProvider = (props) => {
             .then(getAllPosts)
     }
 
+    const approvePost = (postId, isApproved) => {
+        return fetch(`http://localhost:8000/posts/${postId}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${token}`
+            },
+            body: JSON.stringify({ approved: isApproved })
+        })
+            .then(getAllPosts)
+    }
+
     const parsePostContent = (content) => content.replaceAll('</p>', '').split('<p>')
 
     return (
@@ -93,7 +105,8 @@ export const PostProvider = (props) => {
             getPostsByUser,
             deletePost,
             updatePost,
-            myposts
+            myposts,
+            approvePost
         }}>
             {props.children}
         </PostContext.Provider>
