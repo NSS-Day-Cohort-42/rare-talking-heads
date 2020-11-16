@@ -6,6 +6,7 @@ import { PostContext } from "../posts/PostProvider"
 export const CategoryViewPosts = props => {
 
     const {posts, getPostsByCat} = useContext(PostContext)
+    
 
     useEffect(() => {
         const catId = props.match.params.categoryId
@@ -23,7 +24,7 @@ export const CategoryViewPosts = props => {
                     posts.map(post => {
                         return <section className = "post-preview" key={post.id}>
                             <div className = "post-preview-header">
-                                {post.user_name}
+                                {post.author.user.first_name} {post.author.user.last_name}
                                 <span className="edit-button">
                                     {/* temporary space for edit button */}
                                     edit
@@ -33,7 +34,7 @@ export const CategoryViewPosts = props => {
                                 <h3>{post.title}</h3>
                             </div>
                             <div className = "post-preview-footer">
-                                {post.category_name}
+                                {post.category.label}
                             </div>
                         </section>
                     })
