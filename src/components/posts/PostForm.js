@@ -14,7 +14,7 @@ export const PostForm = (props) => {
     useEffect(() => {
         getAllCategories()
         getAllPosts()
-        .then(getTags)
+        .then(getTags())
     }, [])
 
     

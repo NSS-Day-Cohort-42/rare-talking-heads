@@ -6,9 +6,9 @@ export const PostTagProvider = (props) => {
     const [postTags, setPostTags] = useState([])
 
     const getAllPostTags = () => {
-        return fetch("http://localhost:8000/post_tags", {
+        return fetch("http://localhost:8000/posttags", {
             headers: {
-                "Authorization": `Token ${localStorage.getItem("rare_token")}`,
+                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`,
                 "Content-Type": "application/json"
             }
         })
@@ -17,9 +17,9 @@ export const PostTagProvider = (props) => {
     }
 
     const getPostTagsByPost = (postId) => {
-        return fetch(`http://localhost:8000/post_tags?post_id=${postId}`, {
+        return fetch(`http://localhost:8000/posttags?post_id=${postId}`, {
             headers: {
-            "Authorization": `Token ${localStorage.getItem("rare_token")}`,
+            "Authorization": `Token ${localStorage.getItem("rare_user_id")}`,
             "Content-Type": "application/json"
             }
         })
@@ -28,10 +28,10 @@ export const PostTagProvider = (props) => {
     }
 
     const addPostTag = (postTag) => {
-        return fetch("http://localhost:8000/post_tags", {
+        return fetch("http://localhost:8000/posttags", {
             method: "POST",
             headers: {
-                "Authorization": `Token ${localStorage.getItem("rare_token")}`,
+                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(postTag)
@@ -39,10 +39,10 @@ export const PostTagProvider = (props) => {
     }
 
     const removePostTag = (postTagId) => {
-        return fetch(`http://localhost:8000/post_tags/${postTagId}`, {
+        return fetch(`http://localhost:8000/posttags/${postTagId}`, {
             method: "DELETE",
             headers: {
-                "Authorization": `Token ${localStorage.getItem("rare_token")}`,
+                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`,
                 "Content-Type": "application/json"
             },
         })
