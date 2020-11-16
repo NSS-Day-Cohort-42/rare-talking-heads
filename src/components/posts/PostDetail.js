@@ -49,7 +49,7 @@ export const PostDetail = (props) => {
             setEditMode(true);
         }
     }, [post.id])
-   
+    
     return (
         <div className="post">
             <h1 className = "post-title">
@@ -87,13 +87,10 @@ export const PostDetail = (props) => {
                             ? <i className="fas fa-trash-alt" id="delete-post-button" onClick={() => {setDeleteWarning(true)}}></i> 
                             : ''}
                     </div>
-                    <div className="post-manage-tags">
-                        {/* manage tags button will go here */}
+                    <div className="postTagContainer post-manage-tags">
+                        <PostTags postId={post.id} postOwner={editMode} />
                     </div>
                 </div>
-            </div>
-            <div className="postTagContainer">
-                <PostTags postId={post.id} />
             </div>
 
             { deleteWarning

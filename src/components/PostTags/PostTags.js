@@ -3,7 +3,8 @@ import { PostTagContext } from "./PostTagProvider"
 import { TagContext } from "../tags/TagProvider"
 import { CurrentPostTags } from "./CurrentPostTags"
 import { EditPostTags } from "./EditPostTags"
-export const PostTags = ({postId}) => {
+
+export const PostTags = ({postId, postOwner}) => {
     const { postTags, getPostTagsByPost } = useContext(PostTagContext)
     const { tags, getTags } = useContext(TagContext)
     const [isEditing, setIsEditing] = useState(false)
@@ -28,7 +29,8 @@ export const PostTags = ({postId}) => {
     return (
         <div className="post-tags-container">
             <h4 className="post-tags-header">Tags</h4>
-            <button className="edit-post-tags-bttn" onClick={toggleEdit}>manage tags</button>
+            {postOwner ? <button className="edit-post-tags-bttn" onClick={toggleEdit}>Manage tags</button>
+            : ``}
             {isEditing ?
                     (
                     tags.map(tag => {
@@ -43,4 +45,4 @@ export const PostTags = ({postId}) => {
             }
         </div>
     )
-}
+} 
