@@ -36,8 +36,8 @@ export const TagProvider = (props) => {
         }).then(getTags);
     };
 
-    const deleteTag = (c) => {
-        return fetch(`http://localhost:8000/tags/${c.id}`, {
+    const deleteTag = (tagId) => {
+        return fetch(`http://localhost:8000/tags/${tagId}`, {
             method : "DELETE",
             headers:  {
                 "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
