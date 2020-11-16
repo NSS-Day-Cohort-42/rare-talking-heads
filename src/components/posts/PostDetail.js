@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { PostContext } from "./PostProvider"
 import "./Posts.css"
 import "../comments/Comment.css"
+import { PostTags } from "../PostTags/PostTags"
 
 export const PostDetail = (props) => {
     const { getSinglePost, parsePostContent, deletePost} = useContext(PostContext);
@@ -90,6 +91,9 @@ export const PostDetail = (props) => {
                         {/* manage tags button will go here */}
                     </div>
                 </div>
+            </div>
+            <div className="postTagContainer">
+                <PostTags postId={post.id} />
             </div>
 
             { deleteWarning

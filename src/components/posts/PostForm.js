@@ -1,16 +1,19 @@
 import React, { useContext, useEffect, useState } from "react"
 import { PostContext } from "./PostProvider"
 import { CategoryContext } from "../categories/CategoryProvider"
+import { TagContext } from "../tags/TagProvider"
 
 export const PostForm = (props) => {
     const { createNewPost, updatePost, getAllPosts, posts } = useContext( PostContext )
     const { getAllCategories, categories } = useContext( CategoryContext )
-
+    const { tags, getTags } = useContext(TagContext)
+    const [selectedTags, setTags] = useState([])
 
     // Get all the categories to populate the select dropdown
     useEffect(() => {
         getAllCategories()
         getAllPosts()
+        .then(getTags)
     }, [])
 
     
