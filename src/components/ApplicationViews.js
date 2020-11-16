@@ -20,6 +20,9 @@ import {CommentProvider} from "./comments/CommentProvider"
 import {CommentForm} from "./comments/CommentForm"
 import {CommentList} from "./comments/CommentList"
 
+import {UserProvider} from "./users/UserProvider"
+import {UserList} from "./users/UserList"
+
 
 export const ApplicationViews = (props) => {
     return (
@@ -138,6 +141,11 @@ export const ApplicationViews = (props) => {
                 {/* Tag Section Ends */}
 
             {/* </ProfileProvider> */}
+            <UserProvider>
+                <Route exact path = "/users" render={
+                    props => <UserList {...props} />
+                } />
+            </UserProvider>
         
     </>
 
