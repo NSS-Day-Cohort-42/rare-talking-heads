@@ -102,7 +102,7 @@ export const PostForm = (props) => {
                     <label htmlFor="category_id">Category: </label>
                     <select name="category_id" className="form-control"
                         proptype="int"
-                        value={post.category && post.category.id}
+                        value={post.category_id}
                         onChange={handleControlledInputChange}>
 
                             <option value="0">Select a category</option>
