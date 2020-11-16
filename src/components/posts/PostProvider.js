@@ -60,7 +60,10 @@ export const PostProvider = (props) => {
     
     const deletePost = (postId) => new Promise(() => {
         fetch(`http://localhost:8000/posts/${postId}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "Authorization": `Token ${token}`
+            }
         })
             .then(getAllPosts)
     });
@@ -69,7 +72,8 @@ export const PostProvider = (props) => {
         return fetch(`http://localhost:8000/posts/${post.id}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Token ${token}`
             },
             body: JSON.stringify(post)
         })

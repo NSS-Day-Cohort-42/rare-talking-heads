@@ -23,7 +23,7 @@ export const PostForm = (props) => {
     
     useEffect(() => {
         getPostInEditMode()
-    }, [posts])
+    }, [])
 
     // if in edit mode, get the post that matched the postId
     const getPostInEditMode = () => {

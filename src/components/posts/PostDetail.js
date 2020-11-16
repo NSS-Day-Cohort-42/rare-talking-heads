@@ -44,7 +44,7 @@ export const PostDetail = (props) => {
     // },[])
 
     useEffect(() => {
-        if (Number(localStorage.getItem("rare_user_id")) === post.user_id) {
+        if (post.is_owner === true) {
             setEditMode(true);
         }
     }, [post.id])
