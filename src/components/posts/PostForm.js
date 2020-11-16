@@ -58,7 +58,7 @@ export const PostForm = (props) => {
                 publication_date: Date.now(),
                 image_url: post.image_url,
                 category_id: parseInt(post.category_id),
-                approved: true
+                approved: false
             })
                 .then(() => props.history.push("/"))
         }
