@@ -14,6 +14,7 @@ export const UserProvider = props => {
         })
         .then(r => r.json())
         .then(setUsers)
+        
     }
 
     const getSingleUser = (userId) => {

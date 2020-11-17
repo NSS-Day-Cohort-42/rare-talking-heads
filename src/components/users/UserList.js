@@ -10,12 +10,9 @@ export const UserList = props => {
 
     const {isAdmin} = useContext(ProfileContext)
 
-    
-    
-
-
     useEffect(() => {
         getAllUsers()
+        
     }, [])
 
 
