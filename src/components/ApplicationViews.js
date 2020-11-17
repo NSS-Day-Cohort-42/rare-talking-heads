@@ -21,6 +21,10 @@ import {CommentForm} from "./comments/CommentForm"
 import {CommentList} from "./comments/CommentList"
 import { PostTagProvider } from "./PostTags/PostTagProvider"
 
+import {UserProvider} from "./users/UserProvider"
+import {UserList} from "./users/UserList"
+import {UserDetail} from "./users/UserDetail"
+
 
 export const ApplicationViews = (props) => {
     return (
@@ -144,6 +148,13 @@ export const ApplicationViews = (props) => {
                 {/* Tag Section Ends */}
 
             {/* </ProfileProvider> */}
+            <UserProvider>
+                <Route exact path = "/users" render={
+                    props => <UserList {...props} />
+                } />
+
+            <Route exact path="/users/:userId(\d+)" render={ props => <UserDetail history={props.history} {...props} /> } />    
+            </UserProvider>
         
     </>
 
