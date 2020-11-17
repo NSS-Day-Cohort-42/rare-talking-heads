@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { PostContext } from "./PostProvider"
 import "./Posts.css"
 import "../comments/Comment.css"
+import { PostTags } from "../PostTags/PostTags"
 
 export const PostDetail = (props) => {
     const { getSinglePost, parsePostContent, deletePost} = useContext(PostContext);
@@ -48,7 +49,7 @@ export const PostDetail = (props) => {
             setEditMode(true);
         }
     }, [post.id])
-   
+    
     return (
         <div className="post">
             <h1 className = "post-title">
@@ -86,8 +87,8 @@ export const PostDetail = (props) => {
                             ? <i className="fas fa-trash-alt" id="delete-post-button" onClick={() => {setDeleteWarning(true)}}></i> 
                             : ''}
                     </div>
-                    <div className="post-manage-tags">
-                        {/* manage tags button will go here */}
+                    <div className="postTagContainer post-manage-tags">
+                        <PostTags postId={post.id} postOwner={editMode} />
                     </div>
                 </div>
             </div>
@@ -105,60 +106,5 @@ export const PostDetail = (props) => {
             </div>
             
         </div>
-            
-            
-            /* <article className="comments">
-                    <h3>Cesspool of Comments</h3>
-                    <div className="addCommentbtn">
-                        <button className="btn btn-primary" onClick={
-                            
-                            () => props.history.push(`/comments/create/${props.match.params.postId}`)
-                        }>Add Comment</button>
-                    </div>
-                    
-                {
-                    comments.map(com => {
-                        if(parseInt(localStorage.getItem("rare_user_id")) === com.user_id) {
-                            return <section className="comment card w-50 border-primary" key={com.id}>
-                                
-                                <div className="comment__subject card-header">{com.subject}</div>
-                                <div className="card-body">
-                                <div className="comment__content card-text">{com.content}</div>
-                                </div>
-                                <div className="card-footer">
-                                <div className="comment__userName card-text"><small className="text-muted">{com.user.user_name}</small></div>
-                                
-                                <button className = "mr-2 btn btn-primary" onClick={
-                                    () => props.history.push(`/comments/edit/${com.id}`)
-                                }>Edit</button>
-                                
-                                <button className="mr-2 btn btn-danger" onClick={
-                                    () => {
-                                        const postId = parseInt(props.match.params.postId)
-                                        console.log(postId)
-                                        deleteComment(com)
-                                    }
-                                }>Delete</button>
-                                </div>
-                        </section>
-                        } else {
-                            return <section className="comment card w-50 border-secondary" key={com.id}>
-                            <div className="comment__subject card-header">{com.subject}</div>
-                            <div className="card-body">
-                            <div className="comment__content">{com.content}</div>
-                            </div>
-                            <div className="card-footer">
-                            <div className="comment__userName card-text"><small className="text-muted">{com.user.user_name}</small></div>
-                            </div>
-                            </section>
-                        }
-                    })
-                }
-                
-                </article>
-            </div> */
-        
-
-
     )
-};
+}

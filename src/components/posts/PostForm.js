@@ -1,16 +1,20 @@
 import React, { useContext, useEffect, useState } from "react"
 import { PostContext } from "./PostProvider"
 import { CategoryContext } from "../categories/CategoryProvider"
+import { TagContext } from "../tags/TagProvider"
+import { TagBoxes } from "../tags/TagCheckbox"
 
 export const PostForm = (props) => {
     const { createNewPost, updatePost, getAllPosts, posts } = useContext( PostContext )
     const { getAllCategories, categories } = useContext( CategoryContext )
-
+    const { tags, getTags } = useContext(TagContext)
+    const [selectedTags, setTags] = useState([])
 
     // Get all the categories to populate the select dropdown
     useEffect(() => {
         getAllCategories()
         getAllPosts()
+        .then(getTags())
     }, [])
 
     
@@ -48,7 +52,8 @@ export const PostForm = (props) => {
                 title: post.title,
                 content: post.content,
                 image_url: post.image_url,
-                category_id: parseInt(post.category_id)
+                category_id: parseInt(post.category_id),
+                selected_tags: []
             })
                 .then(() => props.history.push("/"))
         } else {
@@ -58,7 +63,8 @@ export const PostForm = (props) => {
                 publication_date: Date.now(),
                 image_url: post.image_url,
                 category_id: parseInt(post.category_id),
-                approved: true
+                approved: false,
+                selected_tags: selectedTags
             })
                 .then(() => props.history.push("/"))
         }
@@ -114,6 +120,13 @@ export const PostForm = (props) => {
                         </select>
                 </div>
             </fieldset>
+
+            <div className="tag-container">
+                {
+                    tags.map(t => <TagBoxes tag={t} selectedTags={selectedTags} setTags={setTags}  post={post} editMode={editMode} {...props} />)
+                }
+            </div>
+
             <button type="submit"
                 onClick={e => {
                     e.preventDefault()
