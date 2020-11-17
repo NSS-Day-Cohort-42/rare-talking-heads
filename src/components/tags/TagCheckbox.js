@@ -15,7 +15,9 @@ export const TagBoxes = (props) => {
     }, [postTags])
 
     useEffect(() => {
-        getPostTagsByPost(props.post.id)
+        if (props.post.id) {
+            getPostTagsByPost(props.post.id)
+        }
     },[props.editMode, props.post.id])
 
 
