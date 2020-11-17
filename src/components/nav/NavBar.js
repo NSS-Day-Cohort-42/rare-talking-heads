@@ -20,7 +20,7 @@ export const NavBar = () => {
                 </Link>
             </li>
             <li className="navbar__item">
-                <Link className="navbar__link" to="/"><i class="fas fa-home fa-3x"></i></Link>
+                <Link className="navbar__link" to="/"><i className="fas fa-home fa-3x"></i></Link>
             </li>
             <li className="navbar__item">
                 <Link className="navbar__link" to="/posts/myposts"><button className="btn btn-primary">My Posts</button></Link>
@@ -36,11 +36,17 @@ export const NavBar = () => {
             <li className="navbar__item">
                 <Link className="nav-link" to="/tags"><button className="btn btn-primary">Tags</button></Link>
             </li>
-
-            <li className="navbar__item">
-                <Link className="nav-link" to="/users">User Manager</Link>
-            </li>
-
+            {
+                isAdmin ?
+                
+                < li className="navbar__item">
+                    <Link className="nav-link" to="/users"><button className="btn btn-primary">User Manager</button></Link>
+                </li>
+                :
+                < li className="navbar__item">
+                    <Link className="nav-link" to="/users"><button className="btn btn-primary">Users</button></Link>
+                </li>
+            }
             {
                 (localStorage.getItem("rare_user_id") !== null) ?
                     <li className="nav-item">
@@ -49,7 +55,7 @@ export const NavBar = () => {
                                 localStorage.removeItem("rare_user_id")
                                 history.push({ pathname: "/" })
                             }}
-                        ><i class="fas fa-sign-out-alt fa-3x"></i></button>
+                        ><i className="fas fa-sign-out-alt fa-3x"></i></button>
                     </li>
                      :
                     <>
