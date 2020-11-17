@@ -28,7 +28,9 @@ export const UserList = props => {
                         <th scope="col">Username</th>
                         <th scope="col">Name</th>
                         <th scope="col">User Type</th>
+                        {isAdmin ? <th scope="col">Active</th> : ''}
                         {isAdmin ? <th scope="col">Set User Type</th>: ''}
+
                         
                     </tr>
                 </thead>
@@ -46,6 +48,11 @@ export const UserList = props => {
                         
                         <td>{userType ? "Admin" : "User"}</td>
                         
+                        {isAdmin ?
+                            <td><button className="btn btn-danger">Active Placeholder</button></td>
+                        :
+                        ''
+                        }
                         
                         {isAdmin ? 
                             <td><button className="btn btn-primary">Placeholder Admin</button>
