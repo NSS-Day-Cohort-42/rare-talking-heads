@@ -1,19 +1,20 @@
-import React, { useContext, useEffect } from "react";
-
-import Tag from "./Tag";
-import { TagContext } from "./TagProvider";
+import React, { useContext, useEffect, useState } from "react"
+import Tag from "./Tag"
+import { TagContext } from "./TagProvider"
 import { ProfileContext } from "../auth/AuthProvider"
-
-
 import "./Tags.css"
 
 export default (props) => {
-    const { tags, getTags, setTag } = useContext(TagContext);
-    const { isAdmin } = useContext(ProfileContext);
+    const { tags, getTags, setTag, deleteTag } = useContext(TagContext)
+    const { isAdmin } = useContext(ProfileContext)
 
+    // State for the confirmation to delete a tag
+    const [deleteWarning, setDeleteWarning] = useState(-1)
+
+    // Upon page load getTags runs to get the tags from the provider
     useEffect(() => {
-        getTags();
-    }, []);
+        getTags()
+    }, [])
 
     return (
         <>
@@ -32,18 +33,33 @@ export default (props) => {
                         {tags.map((tag) => (
                             <tr>
                                 <td>
+                                    {/* If the user id an admin they are able to edit and delete a tag */}
                                     {isAdmin 
-                                        ? <button className="btn categoryEditBtn" onClick={
+                                        ? <div><button className="btn tagEditBtn" onClick={
                                             () => {
-                                            setTag(tag)
-                                            props.history.push(`/tags/edit/${tag.id}`)
+                                                setTag(tag)
+                                                props.history.push(`/tags/edit/${tag.id}`)
                                             }
-                                            }><i className="fas fa-edit fa-sm" id="edit-category-button" size="sm"/></button>
+                                        }><i className="fas fa-edit fa-sm" id="edit-tag-button" size="sm"/></button>
+                                            <button className="btn tagDeleteButton"
+                                            onClick={() => {setDeleteWarning(tag.id)}}>
+                                                <i className="fas fa-trash-alt fa-sm" id="delete-tag-button" size="sm"></i>
+                                                </button>
+                                        </div>
                                         : ''}
                                 </td>
                                 <td>
                                     <Tag tag={tag} key={tag.id} />
                                 </td>
+                                {/* The confirmation that appears after a user clicks the trash icon */}
+                                { deleteWarning === tag.id
+                                    ? <div className="alert alert-danger" role="alert">
+                                        Are you sure you want to delete this tag?
+                                        <button className = "btn btn-secondary" onClick={() => {deleteTag(tag.id).then(props.history.push('/tags'))}}>Yes, delete</button>
+                                        <button className = "btn btn-secondary" onClick={() => {setDeleteWarning(false)}}>No, cancel</button>
+                                    </div>
+                                    : ''
+                                    }
                             </tr>
                         ))}
                     </tbody>
@@ -51,5 +67,5 @@ export default (props) => {
             </div>
         </div>
         </>
-    );
-};
+    )
+}

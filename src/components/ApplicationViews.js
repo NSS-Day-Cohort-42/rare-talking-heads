@@ -19,6 +19,7 @@ import { TagForm } from "./tags/TagForm"
 import {CommentProvider} from "./comments/CommentProvider"
 import {CommentForm} from "./comments/CommentForm"
 import {CommentList} from "./comments/CommentList"
+import { PostTagProvider } from "./PostTags/PostTagProvider"
 
 import {UserProvider} from "./users/UserProvider"
 import {UserList} from "./users/UserList"
@@ -36,65 +37,70 @@ export const ApplicationViews = (props) => {
         </main>
 
         {/* Post Section Begins */}
-        <PostProvider>
-            <CategoryProvider>
-                <CommentProvider>
-                
-                <Route exact path="/posts/:postId(\d+)" render={ props => <PostDetail history={props.history} {...props} /> } />
-
-                
-
-
-                <Route exact path = "/comments/create/:postId(\d+)" render={
-                    props => {
-                        return <CommentForm {...props} />
-                    }
-                } />
-                <Route exact path = "/comments/edit/:commentId(\d+)" render={
-                    props => {
-                        return <CommentForm {...props} />
-                    }
-                } />
-            
-                <Route exact path = "/comments/post/:postId(\d+)" render={props => <CommentList history={props.history}{...props} /> } />
-                
-                
-                <Route exact path="/" render={
-                    props => {
-                        return <PostList history={props.history} />}
-                }>
-                </Route>
-
-               
+        <TagProvider>
+            <PostTagProvider>
+                <PostProvider>
+                    <CategoryProvider>
+                        <CommentProvider>
                         
-                    
-                    
-                        
-                        
+                        <Route exact path="/posts/:postId(\d+)" render={ props => <PostDetail history={props.history} {...props} /> } />
+
                         
 
-                        <Route exact path="/posts/myposts" render={
-                                    props => <PostList {...props} />
-                                } />
 
-                        {/* When the URL changes to /posts/create render the PostForm */}
-                        <Route exact path="/posts/create" render={
-                                props => {
-                                    return <PostForm {...props} />
-                                }
-                            }>
-                        </Route>
-                        
-                        {/* When the URL changes to /posts/edit render the PostForm in edit mode */}
-                        <Route exact path="/posts/edit/:postId(\d+)" render={
+                        <Route exact path = "/comments/create/:postId(\d+)" render={
                             props => {
-                                return <PostForm {...props} />
+                                return <CommentForm {...props} />
                             }
+                        } />
+                        <Route exact path = "/comments/edit/:commentId(\d+)" render={
+                            props => {
+                                return <CommentForm {...props} />
+                            }
+                        } />
+                    
+                        <Route exact path = "/comments/post/:postId(\d+)" render={props => <CommentList history={props.history}{...props} /> } />
+                        
+                        
+                        <Route exact path="/" render={
+                            props => {
+                                return <PostList history={props.history} />}
                         }>
                         </Route>
-                            </CommentProvider>
-                        </CategoryProvider>
-                </PostProvider>
+
+                    
+                                
+                            
+                            
+                                
+                                
+                                
+
+                                <Route exact path="/posts/myposts" render={
+                                            props => <PostList {...props} />
+                                        } />
+
+                                {/* When the URL changes to /posts/create render the PostForm */}
+                                <Route exact path="/posts/create" render={
+                                        props => {
+                                            return <PostForm {...props} />
+                                        }
+                                    }>
+                                </Route>
+                                
+                                {/* When the URL changes to /posts/edit render the PostForm in edit mode */}
+                                <Route exact path="/posts/edit/:postId(\d+)" render={
+                                    props => {
+                                        return <PostForm {...props} />
+                                    }
+                                }>
+                                </Route>
+                                    </CommentProvider>
+                                </CategoryProvider>
+                        </PostProvider>
+                    </PostTagProvider>
+                </TagProvider>
+
                 {/* Post Section Ends */}
                 
                 {/* Category Section Begins */}
