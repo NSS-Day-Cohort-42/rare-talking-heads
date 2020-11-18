@@ -3,16 +3,28 @@ import { Link } from "react-router-dom"
 
 import { ProfileContext } from "../auth/AuthProvider"
 import { PostContext } from "./PostProvider"
+import { SubscriptionContext } from "../subscriptions/SubscriptionProvider"
 import "./Posts.css"
 
 export const PostList = props => {
-    const { posts, getAllPosts, getPostsByUser, myposts, approvePost } = useContext(PostContext)
+    const { posts, getAllPosts, setPosts, getPostsByUser, myposts, approvePost } = useContext(PostContext)
     const { profile, isAdmin } = useContext(ProfileContext)
+    const { getSubscriptionsByUser, subscribedAuthors } = useContext(SubscriptionContext)
 
 
     const [view, setView] = useState('all')
 
     const [showOthersPosts, setShowOthersPosts] = useState(true)
+    
+    const showSubscribedOnly = () => {
+        // get subscribtion
+        if (profile.user) {
+           getSubscriptionsByUser(profile.user.id)
+        }
+        
+        // subscribedPosts = posts.contains()
+        // setPosts(subscribedPosts)
+    };
 
     useEffect(() => {
         if (props.match) {
@@ -26,15 +38,14 @@ export const PostList = props => {
                 getAllPosts()
                 setView('subscribed')
                 setShowOthersPosts(true)
+                showSubscribedOnly()
             }
         }
         else {
             getAllPosts()
             setShowOthersPosts(true)
         }
-    }, [profile, props.match]) 
-
-    
+    }, [profile, props.match])
 
     const approvalHandler = (e) => {
         const index = e.target.dataset.index;
@@ -46,9 +57,11 @@ export const PostList = props => {
         <div>
 
             <article className = "post-list">
-                <h1>{view === 'myposts' ? 'My ' : ''}
-                {view === 'subscribed' ? 'My Subscribed ' : ''}
-                Posts</h1>
+                <h1>
+                    {view === 'myposts' ? 'My ' : ''}
+                    {view === 'subscribed' ? 'My Subscribed ' : ''}
+                    Posts
+                </h1>
                 <button className="addPostBtn btn btn-primary"
                 onClick={
                     () =>

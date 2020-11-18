@@ -30,7 +30,6 @@ export const PostProvider = (props) => {
         }).then(getAllPosts)
     }
 
-
     const getPostsByCat = (category_id) => {
         return fetch(`http://localhost:8000/posts?category_id=${category_id}`)
             .then(r => r.json())
@@ -47,7 +46,6 @@ export const PostProvider = (props) => {
             .then(setMyPosts)
     }
 
-    
     const getSinglePost = (postId) => {
         return fetch(`http://localhost:8000/posts/${postId}`, {
             method: "GET",
@@ -57,7 +55,7 @@ export const PostProvider = (props) => {
         })
             .then(res => res.json())
     }
-    
+
     const deletePost = (postId) => new Promise(() => {
         fetch(`http://localhost:8000/posts/${postId}`, {
             method: "DELETE",
@@ -112,7 +110,4 @@ export const PostProvider = (props) => {
             {props.children}
         </PostContext.Provider>
     )
-
-
-
 };
