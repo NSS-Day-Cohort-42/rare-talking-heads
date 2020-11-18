@@ -77,14 +77,14 @@ export const UserList = props => {
                         
                         {isAdmin ? 
                             <td><div className="form-check">
-                            <input class="form-check-input" type="checkbox" checked={u.user.is_staff} id={u.id} data-index={index} onChange={approvalHandler}/>
-                            <label class="form-check-label" for="defaultCheck1">
+                            <input className="form-check-input" type="checkbox" checked={u.user.is_staff} id={u.id} data-index={index} onChange={approvalHandler}/>
+                            <label className="form-check-label" for="defaultCheck1">
                                 Admin
                             </label>
                             </div>
                             <div className="form-check">
-                            <input class="form-check-input" type="checkbox" checked={!u.user.is_staff} id={u.id} data-index={index} onChange={approvalHandler}/>
-                            <label class="form-check-label" for="defaultCheck1">
+                            <input className="form-check-input" type="checkbox" checked={!u.user.is_staff} id={u.id} data-index={index} onChange={approvalHandler}/>
+                            <label className="form-check-label" for="defaultCheck1">
                                 User
                             </label>
                             </div>

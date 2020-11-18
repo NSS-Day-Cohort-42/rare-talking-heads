@@ -62,7 +62,7 @@ export const PostList = props => {
                             return (
                                 <section className = "post-preview" key={post.id}>
                                     <div className = "post-preview-header">
-                                        By: {post.author.user.first_name} {post.author.user.last_name}
+                                        <Link to={`/users/${post.author_id}`}>By: {post.author.user.first_name} {post.author.user.last_name} </Link>
                                         {ableToEdit() ? (<span className="edit-button"> {/* If user id matches the post.user_id they will be able to edit post */}
                                             <i className="fas fa-edit"
                                             style={{cursor:'pointer'}}
