@@ -14,7 +14,6 @@ export const Login = props => {
 
     const handleLogin = (e) => {
         e.preventDefault()
-
         return fetch("http://127.0.0.1:8000/login", {
             method: "POST",
             headers: {
@@ -28,7 +27,7 @@ export const Login = props => {
         })
             .then(res => res.json())
             .then(res => {
-                if ("valid" in res && res.valid && "token" in res) {
+                if ("valid" in res && res.valid && "isActive" in res && "token" in res) {
                     setIsAdmin(res.isAdmin)
                     localStorage.setItem( "rare_user_id", res.token )
                     
