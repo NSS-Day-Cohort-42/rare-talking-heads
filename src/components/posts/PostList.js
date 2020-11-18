@@ -34,6 +34,8 @@ export const PostList = props => {
         }
     }, [profile, props.match]) 
 
+    
+
     const approvalHandler = (e) => {
         const index = e.target.dataset.index;
         const post = posts[index]
