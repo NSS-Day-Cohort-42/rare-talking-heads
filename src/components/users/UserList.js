@@ -31,7 +31,7 @@ export const UserList = props => {
         console.log(adminCount)
 
         if (adminCount.length === 1 && user.user.is_staff)
-            alert("Sorry you are the last admin!")
+            alert("Sorry that's the last admin!  Please grant someone else admin access first")
         else changeUserType(user.id, !user.user.is_staff)
 
     }
