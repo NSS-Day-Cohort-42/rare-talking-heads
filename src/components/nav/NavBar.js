@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext} from "react"
 import { Link, useHistory } from "react-router-dom"
 
 import { ProfileContext } from "../auth/AuthProvider"
@@ -10,17 +10,19 @@ export const NavBar = () => {
     const history = useHistory()
 
     const { isAdmin } = useContext(ProfileContext)
+    
+    
 
 
     return (
         <ul className="navbar">
             <li className="navbar__item">
-                <Link className="navbar__link" to="/">
+                <Link className="navbar__link" to="/posts/subscribed">
                     <img className="navbar__logo" src={Logo} alt="logo"/>
                 </Link>
             </li>
             <li className="navbar__item">
-                <Link className="navbar__link" to="/"><i className="fas fa-home fa-3x"></i></Link>
+                <Link className="navbar__link" to="/"><button className="btn btn-primary">All Posts</button></Link>
             </li>
             <li className="navbar__item">
                 <Link className="navbar__link" to="/posts/myposts"><button className="btn btn-primary">My Posts</button></Link>
@@ -54,6 +56,8 @@ export const NavBar = () => {
                             onClick={() => {
                                 localStorage.removeItem("rare_user_id")
                                 history.push({ pathname: "/" })
+                                
+                                
                             }}
                         ><i className="fas fa-sign-out-alt fa-3x"></i></button>
                     </li>
