@@ -5,6 +5,7 @@ export const ProfileContext = React.createContext()
 export const ProfileProvider = (props) => {
     const [profile, setProfile] = useState({events:[]})
     const [isAdmin, setIsAdmin] = useState(false)
+    const [ isActive, setIsActive ] = useState(false)
 
     const getProfile = () => {
         return fetch("http://localhost:8000/profile", {
@@ -21,12 +22,13 @@ export const ProfileProvider = (props) => {
     useEffect(() => {
         if (profile.user) {
             setIsAdmin(profile.user.is_staff)
+            setIsActive(profile.user.isActive)
         }
     }, [profile])
 
     return (
         <ProfileContext.Provider value={{
-            profile, getProfile, isAdmin, setIsAdmin
+            profile, getProfile, isAdmin, setIsAdmin, isActive, setIsActive
         }}>
             {props.children}
         </ProfileContext.Provider>
