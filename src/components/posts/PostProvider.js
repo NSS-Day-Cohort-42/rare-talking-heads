@@ -32,7 +32,11 @@ export const PostProvider = (props) => {
 
 
     const getPostsByCat = (category_id) => {
-        return fetch(`http://localhost:8000/posts?category_id=${category_id}`)
+        return fetch(`http://localhost:8000/posts?category_id=${category_id}`, {
+            headers: {
+                "Authorization": `Token ${token}`
+            }
+        })
             .then(r => r.json())
             .then(setPosts)
     }
