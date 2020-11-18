@@ -61,7 +61,7 @@ export const Login = props => {
                     <fieldset style={{
                         textAlign:"center"
                     }}>
-                        <button className="btn btn-1 btn-sep icon-send" type="submit">Sign In</button>
+                        <button className="btn btn-primary" type="submit">Sign In</button>
                     </fieldset>
                 </form>
             </section>

@@ -28,6 +28,8 @@ export const PostList = props => {
         }
     }, []) 
 
+    
+
     const approvalHandler = (e) => {
         const index = e.target.dataset.index;
         const post = posts[index]

@@ -27,11 +27,24 @@ export const UserProvider = props => {
         .then(r => r.json())
     }
 
+    const changeUserType = (userId, userType) => {
+        return fetch(`http://localhost:8000/users/${userId}`, {
+            method : "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+            },
+            body: JSON.stringify({is_staff : userType})
+        }).then(getAllUsers)
+    }
+
     return (
         <UserContext.Provider value={{
             users,
             getAllUsers,
-            getSingleUser
+            getSingleUser,
+            changeUserType
+
         }}>
             {props.children}
         </UserContext.Provider>
