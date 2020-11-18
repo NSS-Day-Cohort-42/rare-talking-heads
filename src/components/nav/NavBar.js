@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext} from "react"
 import { Link, useHistory } from "react-router-dom"
 
 import { ProfileContext } from "../auth/AuthProvider"
@@ -10,6 +10,8 @@ export const NavBar = () => {
     const history = useHistory()
 
     const { isAdmin } = useContext(ProfileContext)
+    
+    
 
 
     return (
@@ -54,6 +56,8 @@ export const NavBar = () => {
                             onClick={() => {
                                 localStorage.removeItem("rare_user_id")
                                 history.push({ pathname: "/" })
+                                
+                                
                             }}
                         ><i className="fas fa-sign-out-alt fa-3x"></i></button>
                     </li>
