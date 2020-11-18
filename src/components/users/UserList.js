@@ -8,10 +8,11 @@ import {ProfileContext} from "../auth/AuthProvider"
 export const UserList = props => {
     const {users, getAllUsers, changeUserType, changeUserActiveStatus} = useContext(UserContext)
 
-    const { isAdmin, isActive } = useContext(ProfileContext)
+    const { isAdmin } = useContext(ProfileContext)
 
-    
-    
+    // State for the confirmation to delete a tag
+    const [ deleteWarning, setDeleteWarning ] = useState(-1)
+
 
     useEffect(() => {
         getAllUsers()
@@ -24,7 +25,6 @@ export const UserList = props => {
         changeUserType(user.id, !user.user.is_staff)
 
     }
-
 
     return (
         <>
@@ -56,8 +56,21 @@ export const UserList = props => {
                         <td>{userType ? "Admin" : "User"}</td>
                         
                         {isAdmin ?
-                            <td><button className="btn btn-danger"
-                            onClick="">Deactivate User</button></td>
+                            <td>
+                                {
+                                u.user.is_active // true or false -- if true, display red button that says deactivat, if false green reactivate button
+                                    ? <button className="btn btn-danger"
+                                    onClick={e => {
+                                        setDeleteWarning(u.id) // will display a confirmation message to make sure the user should be deactivated
+                                    }}>Deactivate User</button>
+                                    : <button className="btn btn-success"
+                                    onClick={e => {
+                                        e.preventDefault(
+                                        changeUserActiveStatus(u.id, !u.user.is_active) // will change the field of "is_active" to the opposite of what it currently is
+                                        )
+                                    }}>Reactivate User</button>
+                                }
+                                </td>
                         :
                         ''
                         }
@@ -79,7 +92,16 @@ export const UserList = props => {
                         :
                         ''
                         }
-                        
+                        {/* The confirmation that appears after a user clicks the DEACTIVATE USER button */}
+                        { deleteWarning === u.id
+                                    ? <div className="alert alert-danger" role="alert">
+                                        Are you sure you want to deactivate this user?
+                                        {/* When an admin clicks the yes deactivate button it will change the "is_active" field on the user to the opposite of current state */}
+                                        <button className = "btn btn-secondary" onClick={() => {changeUserActiveStatus(u.id, !u.user.is_active).then(props.history.go(0))}}>Yes, deactivate</button>
+                                        <button className = "btn btn-secondary" onClick={() => {setDeleteWarning(false)}}>No, cancel</button>
+                                    </div>
+                                    : ''
+                                    }
                     
                         </tr>
                 })
