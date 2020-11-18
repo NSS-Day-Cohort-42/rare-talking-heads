@@ -6,14 +6,29 @@ import {UserContext} from "./UserProvider"
 import {ProfileContext} from "../auth/AuthProvider"
 
 export const UserList = props => {
-    const {users, getAllUsers} = useContext(UserContext)
+    const {users, getAllUsers, changeUserType} = useContext(UserContext)
 
     const {isAdmin} = useContext(ProfileContext)
+
+    
+    
 
     useEffect(() => {
         getAllUsers()
         
     }, [])
+
+    const approvalHandler = (e) => {
+        const index = e.target.dataset.index
+        
+        console.log(index)
+        const user = users[index]
+        console.log(user.id)
+        console.log(user.user.is_staff)
+        
+        changeUserType(user.id, !user.user.is_staff)
+
+    }
 
 
     return (
@@ -33,7 +48,7 @@ export const UserList = props => {
                 </thead>
                 <tbody>
             {
-                users.map(u => {
+                users.map((u, index) => {
                     const userType = u.user && u.user.is_staff.toString() === "true"                      
                     return <tr className="user" key={u.id}>
                         
@@ -52,9 +67,19 @@ export const UserList = props => {
                         }
                         
                         {isAdmin ? 
-                            <td><button className="btn btn-primary">Placeholder Admin</button>
-                            <button className="btn btn-secondary">Placeholder User</button></td>
-                            
+                            <td><div className="form-check">
+                            <input class="form-check-input" type="checkbox" checked={u.user.is_staff} id={u.id} data-index={index} onChange={approvalHandler}/>
+                            <label class="form-check-label" for="defaultCheck1">
+                                Admin
+                            </label>
+                            </div>
+                            <div className="form-check">
+                            <input class="form-check-input" type="checkbox" checked={!u.user.is_staff} id={u.id} data-index={index} onChange={approvalHandler}/>
+                            <label class="form-check-label" for="defaultCheck1">
+                                User
+                            </label>
+                            </div>
+                        </td>    
                         :
                         ''
                         }
@@ -71,3 +96,8 @@ export const UserList = props => {
 
 
 }
+
+
+
+{/* <td><button className="btn btn-primary">Placeholder Admin</button>
+<button className="btn btn-secondary">Placeholder User</button></td> */}

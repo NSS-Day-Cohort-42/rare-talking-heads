@@ -80,16 +80,16 @@ export const Register = (props) => {
                 </fieldset>
                 <fieldset>
                     <label htmlFor="verifyPassword"> Short Bio: </label>
-                    <textarea ref={bio} name="bio" className="form-control" placeholder="Let other gamers know a little bit about you..." />
+                    <textarea ref={bio} name="bio" className="form-control" placeholder="Let other users know a little bit about you..." />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="profile_img_url"> Profile URL: </label>
-                    <textarea ref={profile_image_url} name="profile_image_url" className="form-control" placeholder="Let other gamers know a little bit about you..." />
+                    <textarea ref={profile_image_url} name="profile_image_url" className="form-control" />
                 </fieldset>
                 <fieldset style={{
                     textAlign: "center"
                 }}>
-                    <button className="btn btn-1 btn-sep icon-send" type="submit">Register</button>
+                    <button className="btn btn-primary icon-send" type="submit">Register</button>
                 </fieldset>
             </form>
             <section className="link--register">
