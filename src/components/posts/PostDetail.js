@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { PostContext } from "./PostProvider"
 import "./Posts.css"
 import "../comments/Comment.css"
+import { PostTags } from "../PostTags/PostTags"
 
 export const PostDetail = (props) => {
     const { getSinglePost, parsePostContent, deletePost} = useContext(PostContext);
@@ -48,7 +49,7 @@ export const PostDetail = (props) => {
             setEditMode(true);
         }
     }, [post.id])
-   
+    
     return (
         <div className="post">
             <h1 className = "post-title">
@@ -86,8 +87,8 @@ export const PostDetail = (props) => {
                             ? <i className="fas fa-trash-alt" id="delete-post-button" onClick={() => {setDeleteWarning(true)}}></i> 
                             : ''}
                     </div>
-                    <div className="post-manage-tags">
-                        {/* manage tags button will go here */}
+                    <div className="postTagContainer post-manage-tags">
+                        <PostTags postId={post.id} postOwner={editMode} />
                     </div>
                 </div>
             </div>
