@@ -97,6 +97,7 @@ export const PostProvider = (props) => {
     return (
         <PostContext.Provider value={{
             posts,
+            setPosts,
             getAllPosts,
             getSinglePost,
             parsePostContent,

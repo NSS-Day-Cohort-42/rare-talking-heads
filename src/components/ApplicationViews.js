@@ -73,7 +73,9 @@ export const ApplicationViews = (props) => {
                             
                             
                                 
-                                
+                                <Route exact path="/posts/subscribed" render={
+                                            props => <PostList {...props} />
+                                        } />
                                 
 
                                 <Route exact path="/posts/myposts" render={

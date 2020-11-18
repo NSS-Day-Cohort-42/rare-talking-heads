@@ -7,31 +7,36 @@ import "./Posts.css"
 
 export const PostList = props => {
     const { posts, getAllPosts, getPostsByUser, myposts, approvePost } = useContext(PostContext)
-    const { isAdmin } = useContext(ProfileContext)
+    const { profile, isAdmin } = useContext(ProfileContext)
 
 
     const [view, setView] = useState('all')
 
-    const [userPost, setUserPosts] = useState(true)
+    const [showOthersPosts, setShowOthersPosts] = useState(true)
 
     useEffect(() => {
         if (props.match) {
             if (props.match.path === '/posts/myposts') {
-                const owner = posts.find(p => p.is_owner === true)
-                getPostsByUser(owner.author_id);
-                setView('myposts')
-                setUserPosts(false)
+                if (profile.user) {
+                    getPostsByUser(profile.user.id);
+                    setView('myposts')
+                    setShowOthersPosts(false)
+                }
+            } else if (props.match.path === '/posts/subscribed') {
+                getAllPosts()
+                setView('subscribed')
+                setShowOthersPosts(true)
             }
         }
         else {
             getAllPosts()
+            setShowOthersPosts(true)
         }
-    }, []) 
+    }, [profile, props.match]) 
 
     const approvalHandler = (e) => {
         const index = e.target.dataset.index;
         const post = posts[index]
-        // post.approved = !posts[index].approved
         approvePost(post.id, !post.approved)
     };
 
@@ -39,13 +44,15 @@ export const PostList = props => {
         <div>
 
             <article className = "post-list">
-                <h1>{view === 'myposts' ? 'My ' : ''}Posts</h1>
+                <h1>{view === 'myposts' ? 'My ' : ''}
+                {view === 'subscribed' ? 'My Subscribed ' : ''}
+                Posts</h1>
                 <button className="addPostBtn btn btn-primary"
                 onClick={
                     () =>
                     props.history.push("/posts/create")}>Add New Post</button>
 
-                {userPost ?
+                {showOthersPosts ?
                     posts.map((post, index) => {
                         // this function checks to see if the current user has any posts that they wrote
                         const ableToEdit = () => {
