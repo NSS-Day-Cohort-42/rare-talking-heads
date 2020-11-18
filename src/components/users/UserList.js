@@ -6,9 +6,9 @@ import {UserContext} from "./UserProvider"
 import {ProfileContext} from "../auth/AuthProvider"
 
 export const UserList = props => {
-    const {users, getAllUsers, changeUserType} = useContext(UserContext)
+    const {users, getAllUsers, changeUserType, changeUserActiveStatus} = useContext(UserContext)
 
-    const {isAdmin} = useContext(ProfileContext)
+    const { isAdmin, isActive } = useContext(ProfileContext)
 
     
     
@@ -20,12 +20,7 @@ export const UserList = props => {
 
     const approvalHandler = (e) => {
         const index = e.target.dataset.index
-        
-        console.log(index)
         const user = users[index]
-        console.log(user.id)
-        console.log(user.user.is_staff)
-        
         changeUserType(user.id, !user.user.is_staff)
 
     }
@@ -61,7 +56,8 @@ export const UserList = props => {
                         <td>{userType ? "Admin" : "User"}</td>
                         
                         {isAdmin ?
-                            <td><button className="btn btn-danger">Active Placeholder</button></td>
+                            <td><button className="btn btn-danger"
+                            onClick="">Deactivate User</button></td>
                         :
                         ''
                         }

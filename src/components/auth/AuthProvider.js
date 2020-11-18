@@ -17,6 +17,8 @@ export const ProfileProvider = (props) => {
             .then(setProfile)
     }
 
+    
+
     useEffect(getProfile, [])
 
     useEffect(() => {
