@@ -22,7 +22,18 @@ export const UserList = props => {
     const approvalHandler = (e) => {
         const index = e.target.dataset.index
         const user = users[index]
-        changeUserType(user.id, !user.user.is_staff)
+        const adminCount = []
+        
+        users.map(u => {
+            if (u.user.is_staff === true)
+                adminCount.push("1")
+                
+            })
+        console.log(adminCount)
+
+        if (adminCount.length === 1 && user.user.is_staff)
+            alert("Sorry that's the last admin!  Please grant someone else admin access first")
+        else changeUserType(user.id, !user.user.is_staff)
 
     }
 
