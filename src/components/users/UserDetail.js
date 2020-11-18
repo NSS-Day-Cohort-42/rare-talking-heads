@@ -5,10 +5,14 @@ import {Link} from 'react-router-dom'
 
 import {UserContext} from "./UserProvider"
 import {PostContext} from "../posts/PostProvider"
+import {ProfileContext} from "../auth/AuthProvider"
 
 export const UserDetail = (props) => {
     const {getSingleUser} = useContext(UserContext)
-    const {posts, getAllPosts} = useContext(PostContext) 
+    const {myposts, getPostsByUser} = useContext(PostContext)
+
+    const {isAdmin, profile} = useContext(ProfileContext)
+    
     
 
     const [user, setUser] = useState({})
@@ -24,8 +28,12 @@ export const UserDetail = (props) => {
     }, [])
 
     useEffect(() => {
-        getAllPosts()
-    })
+        const userId = parseInt(props.match.params.userId)
+        
+        getPostsByUser(userId)
+    }, [])
+
+    
 
     
     useEffect(() => {
@@ -42,7 +50,7 @@ export const UserDetail = (props) => {
     
 
     return (
-        <>
+        <div>
         <article className="user container">
             <div className="row">
             { imgCheck ?
@@ -77,42 +85,44 @@ export const UserDetail = (props) => {
             <div className="user__name col-5">Name: {user.user && user.user.first_name} {user.user && user.user.last_name}</div>
             </div>
         </article>
-        <article className ="post-list">
-            {
-                posts.map(post => {
-                    const ableToEdit = () => {
-                        if (post.is_owner === true) {
-                            return true
-                        } else {
-                            return false
-                        }
-                    }
-                    return <section className = "post-preview" key={post.id}>
-                            <div className = "post-preview-header">
-                                By: {post.author.user.first_name} {post.author.user.last_name}
-                                {ableToEdit() ? (<span className="edit-button"> {/* If user id matches the post.user_id they will be able to edit post */}
-                                    <i className="fas fa-edit"
-                                    style={{cursor:'pointer'}}
-                                    onClick={() => {props.history.push(`/posts/edit/${post.id}`)}}>Edit</i>
-                                </span>) : <span className="edit-button"> </span>}
-                                
-                            </div>
-                            <div className="post-preview-title">
-                                <Link to={`/posts/${post.id}`}>
-                                    <h3>{post.title}</h3>
-                                </Link>
-                            </div>
-                            <div className = "post-preview-footer">
-                                Category: {post.category.label}
-                            </div>
-                        </section>
-                
-                })
+        
+        {
+        
+            myposts.map(post => {
+            const ableToEdit = () => {
+                if (isAdmin || post.author_id === profile.id) {
+                    return true
+                } else {
+                    return false
+                }
             }
-
+                if (post.approved === true)
+                    return <section className = "post-preview" key={post.id}>
+                        <div className = "post-preview-header">
+                            By: {post.author.user.first_name} {post.author.user.last_name}
+                            {ableToEdit() ? (<span className="edit-button"> {/* If user id matches the post.user_id they will be able to edit post */}
+                                <i className="fas fa-edit"
+                                style={{cursor:'pointer'}}
+                                onClick={() => {props.history.push(`/posts/edit/${post.id}`)}}>Edit</i>
+                            </span>) : <span className="edit-button"> </span>}
+                            
+                        </div>
+                        <div className="post-preview-title">
+                            <Link to={`/posts/${post.id}`}>
+                                <h3>{post.title}</h3>
+                            </Link>
+                        </div>
+                        <div className = "post-preview-footer">
+                            Category: {post.category.label}
+                        </div>
+                    </section>
+    
+            })
+        
+        }
             
-        </article>
-        </>
+            
+        </div>
     )
 
 
@@ -121,3 +131,4 @@ export const UserDetail = (props) => {
 
 
 }
+

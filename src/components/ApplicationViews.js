@@ -149,11 +149,14 @@ export const ApplicationViews = (props) => {
 
             {/* </ProfileProvider> */}
             <UserProvider>
+                <PostProvider>
                 <Route exact path = "/users" render={
                     props => <UserList {...props} />
                 } />
 
+            
             <Route exact path="/users/:userId(\d+)" render={ props => <UserDetail history={props.history} {...props} /> } />    
+                </PostProvider>
             </UserProvider>
         
     </>
