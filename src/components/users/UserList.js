@@ -20,13 +20,19 @@ export const UserList = props => {
 
     const approvalHandler = (e) => {
         const index = e.target.dataset.index
-        
-        console.log(index)
         const user = users[index]
-        console.log(user.id)
-        console.log(user.user.is_staff)
+        const adminCount = []
         
-        changeUserType(user.id, !user.user.is_staff)
+        users.map(u => {
+            if (u.user.is_staff === true)
+                adminCount.push("1")
+                
+            })
+        console.log(adminCount)
+
+        if (adminCount.length === 1 && user.user.is_staff)
+            alert("Sorry you are the last admin!")
+        else changeUserType(user.id, !user.user.is_staff)
 
     }
 
