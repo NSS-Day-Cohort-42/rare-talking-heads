@@ -96,7 +96,7 @@ export const UserDetail = (props) => {
                     return false
                 }
             }
-                if (post.approved === true)
+                if (post.approved === true || isAdmin)
                     return <section className = "post-preview" key={post.id}>
                         <div className = "post-preview-header">
                             By: {post.author.user.first_name} {post.author.user.last_name}
