@@ -7,7 +7,7 @@ import { SubscriptionContext } from "../subscriptions/SubscriptionProvider"
 import "./Posts.css"
 
 export const PostList = props => {
-    const { posts, getAllPosts, setPosts, getPostsByUser, myposts, approvePost } = useContext(PostContext)
+    const { posts, getAllPosts, getPostsByUser, myposts, approvePost } = useContext(PostContext)
     const { profile, isAdmin } = useContext(ProfileContext)
     const { getSubscriptionsByUser, subscribedAuthors } = useContext(SubscriptionContext)
 
@@ -15,16 +15,6 @@ export const PostList = props => {
     const [view, setView] = useState('all')
 
     const [showOthersPosts, setShowOthersPosts] = useState(true)
-    
-    const showSubscribedOnly = () => {
-        // get subscribtion
-        if (profile.user) {
-           getSubscriptionsByUser(profile.user.id)
-        }
-        
-        // subscribedPosts = posts.contains()
-        // setPosts(subscribedPosts)
-    };
 
     useEffect(() => {
         if (props.match) {
@@ -38,7 +28,14 @@ export const PostList = props => {
                 getAllPosts()
                 setView('subscribed')
                 setShowOthersPosts(true)
-                showSubscribedOnly()
+                if (profile.user) {
+                    getSubscriptionsByUser(profile.user.id)
+                        .then(() => {
+                            if (subscribedAuthors.length === 0) {
+                                props.history.push("/")
+                            }
+                        })
+                }
             }
         }
         else {
@@ -69,6 +66,11 @@ export const PostList = props => {
 
                 {showOthersPosts ?
                     posts.map((post, index) => {
+                        // checks to see if the current view is 'subscribed' and filters out non-subscribed posts if so
+                        if (view === 'subscribed' && !subscribedAuthors.includes(post.author_id)) {
+                            return ''
+                        }
+
                         // this function checks to see if the current user has any posts that they wrote
                         const ableToEdit = () => {
                             if (post.is_owner === true) {

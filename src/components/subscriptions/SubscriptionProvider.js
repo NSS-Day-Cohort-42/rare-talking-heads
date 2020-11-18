@@ -21,7 +21,9 @@ export const SubscriptionProvider = (props) => {
                 res.forEach((subscription) => {
                     authors.push(subscription.author_id)
                 })
-                setSubscribedAuthors(authors)})
+                setSubscribedAuthors(authors)
+                return
+            })
     }
 
 
