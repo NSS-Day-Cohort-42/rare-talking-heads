@@ -17,12 +17,12 @@ export const NavBar = () => {
     return (
         <ul className="navbar">
             <li className="navbar__item">
-                <Link className="navbar__link" to="/">
+                <Link className="navbar__link" to="/posts/subscribed">
                     <img className="navbar__logo" src={Logo} alt="logo"/>
                 </Link>
             </li>
             <li className="navbar__item">
-                <Link className="navbar__link" to="/"><i className="fas fa-home fa-3x"></i></Link>
+                <Link className="navbar__link" to="/"><button className="btn btn-primary">All Posts</button></Link>
             </li>
             <li className="navbar__item">
                 <Link className="navbar__link" to="/posts/myposts"><button className="btn btn-primary">My Posts</button></Link>

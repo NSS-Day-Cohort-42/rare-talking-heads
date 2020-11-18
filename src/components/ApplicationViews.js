@@ -24,6 +24,7 @@ import { PostTagProvider } from "./PostTags/PostTagProvider"
 import {UserProvider} from "./users/UserProvider"
 import {UserList} from "./users/UserList"
 import {UserDetail} from "./users/UserDetail"
+import { SubscriptionProvider } from "./subscriptions/SubscriptionProvider"
 
 
 export const ApplicationViews = (props) => {
@@ -42,38 +43,33 @@ export const ApplicationViews = (props) => {
                 <PostProvider>
                     <CategoryProvider>
                         <CommentProvider>
+                            <SubscriptionProvider>
                         
-                        <Route exact path="/posts/:postId(\d+)" render={ props => <PostDetail history={props.history} {...props} /> } />
+                                <Route exact path="/posts/:postId(\d+)" render={ props => <PostDetail history={props.history} {...props} /> } />
 
-                        
-
-
-                        <Route exact path = "/comments/create/:postId(\d+)" render={
-                            props => {
-                                return <CommentForm {...props} />
-                            }
-                        } />
-                        <Route exact path = "/comments/edit/:commentId(\d+)" render={
-                            props => {
-                                return <CommentForm {...props} />
-                            }
-                        } />
-                    
-                        <Route exact path = "/comments/post/:postId(\d+)" render={props => <CommentList history={props.history}{...props} /> } />
-                        
-                        
-                        <Route exact path="/" render={
-                            props => {
-                                return <PostList history={props.history} />}
-                        }>
-                        </Route>
-
-                    
-                                
+                                <Route exact path = "/comments/create/:postId(\d+)" render={
+                                    props => {
+                                        return <CommentForm {...props} />
+                                    }
+                                } />
+                                <Route exact path = "/comments/edit/:commentId(\d+)" render={
+                                    props => {
+                                        return <CommentForm {...props} />
+                                    }
+                                } />
                             
-                            
+                                <Route exact path = "/comments/post/:postId(\d+)" render={props => <CommentList history={props.history}{...props} /> } />
                                 
                                 
+                                <Route exact path="/" render={
+                                    props => {
+                                        return <PostList history={props.history} />}
+                                }>
+                                </Route>
+                                
+                                <Route exact path="/posts/subscribed" render={
+                                            props => <PostList {...props} />
+                                        } />
                                 
 
                                 <Route exact path="/posts/myposts" render={
@@ -95,69 +91,71 @@ export const ApplicationViews = (props) => {
                                     }
                                 }>
                                 </Route>
-                                    </CommentProvider>
-                                </CategoryProvider>
-                        </PostProvider>
-                    </PostTagProvider>
-                </TagProvider>
 
-                {/* Post Section Ends */}
-                
-                {/* Category Section Begins */}
-                <PostProvider>
-                    <CategoryProvider>
-                            <Route exact path = "/categories" render={
-                                props => {
-                                    return <CategoryList history={props.history} />
-                                }
-                            } />
-
-                            <Route exact path ="/categories/create" render={
-                                props => {
-                                    return <CategoryForm {...props} />
-                                }
-                            } />
-
-                            <Route exact path="/categories/edit/:categoryId(\d+)" render={
-                                props => <CategoryForm {...props} />
-                            } />
-
-                            <Route exact path="/posts/category/:categoryId(\d+)" render={
-                                props => <CategoryViewPosts {...props} />
-                            } />
+                            </SubscriptionProvider>
+                        </CommentProvider>
                     </CategoryProvider>
                 </PostProvider>
-                {/* Category Section Ends */}
+            </PostTagProvider>
+        </TagProvider>
 
-                {/* Tag Section Begins */}
-                <TagProvider>
-                    <Route exact path = "/tags" render={
+        {/* Post Section Ends */}
+                
+        {/* Category Section Begins */}
+        <PostProvider>
+            <CategoryProvider>
+                    <Route exact path = "/categories" render={
                         props => {
-                            return <TagList history={props.history} />
+                            return <CategoryList history={props.history} />
                         }
                     } />
 
-                    <Route exact path="/tags/create" render={
-                        props => <TagForm {...props} />
+                    <Route exact path ="/categories/create" render={
+                        props => {
+                            return <CategoryForm {...props} />
+                        }
                     } />
 
-                    <Route exact path="/tags/edit/:tagId(\d+)" render={
-                        props => <TagForm {...props} />
+                    <Route exact path="/categories/edit/:categoryId(\d+)" render={
+                        props => <CategoryForm {...props} />
                     } />
-                </TagProvider>
-                {/* Tag Section Ends */}
 
-            {/* </ProfileProvider> */}
-            <UserProvider>
-                <PostProvider>
-                <Route exact path = "/users" render={
-                    props => <UserList {...props} />
-                } />
+                    <Route exact path="/posts/category/:categoryId(\d+)" render={
+                        props => <CategoryViewPosts {...props} />
+                    } />
+            </CategoryProvider>
+        </PostProvider>
+        {/* Category Section Ends */}
 
-            
-            <Route exact path="/users/:userId(\d+)" render={ props => <UserDetail history={props.history} {...props} /> } />    
-                </PostProvider>
-            </UserProvider>
+        {/* Tag Section Begins */}
+        <TagProvider>
+            <Route exact path = "/tags" render={
+                props => {
+                    return <TagList history={props.history} />
+                }
+            } />
+
+            <Route exact path="/tags/create" render={
+                props => <TagForm {...props} />
+            } />
+
+            <Route exact path="/tags/edit/:tagId(\d+)" render={
+                props => <TagForm {...props} />
+            } />
+        </TagProvider>
+        {/* Tag Section Ends */}
+
+        {/* </ProfileProvider> */}
+        <UserProvider>
+            <PostProvider>
+            <Route exact path = "/users" render={
+                props => <UserList {...props} />
+            } />
+
+        
+        <Route exact path="/users/:userId(\d+)" render={ props => <UserDetail history={props.history} {...props} /> } />    
+            </PostProvider>
+        </UserProvider>
         
     </>
 
