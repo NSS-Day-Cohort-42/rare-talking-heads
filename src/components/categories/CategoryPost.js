@@ -1,11 +1,12 @@
 import React, {useContext, useEffect} from "react"
 import { PostContext } from "../posts/PostProvider"
-
+import { Link } from "react-router-dom"
 
 
 export const CategoryViewPosts = props => {
 
     const {posts, getPostsByCat} = useContext(PostContext)
+    
 
     useEffect(() => {
         const catId = props.match.params.categoryId
@@ -23,17 +24,16 @@ export const CategoryViewPosts = props => {
                     posts.map(post => {
                         return <section className = "post-preview" key={post.id}>
                             <div className = "post-preview-header">
-                                {post.user_name}
-                                <span className="edit-button">
-                                    {/* temporary space for edit button */}
-                                    edit
-                                </span>
+                                {post.author.user.first_name} {post.author.user.last_name}
+                                
                             </div>
                             <div className="post-preview-title">
-                                <h3>{post.title}</h3>
+                                <Link to={`/posts/${post.id}`}>
+                                            <h3>{post.title}</h3>
+                                </Link>
                             </div>
                             <div className = "post-preview-footer">
-                                {post.category_name}
+                                {post.category.label}
                             </div>
                         </section>
                     })
