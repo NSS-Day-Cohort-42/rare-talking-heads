@@ -38,12 +38,24 @@ export const UserProvider = props => {
         }).then(getAllUsers)
     }
 
+    const changeUserActiveStatus = ( userId, isActive ) => {
+        return fetch(`http://localhost:8000/users/${userId}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("rare_user_id")}`
+            },
+            body: JSON.stringify({ is_active : isActive })
+        }).then(getAllUsers)
+    }
+
     return (
         <UserContext.Provider value={{
             users,
             getAllUsers,
             getSingleUser,
-            changeUserType
+            changeUserType,
+            changeUserActiveStatus
 
         }}>
             {props.children}
