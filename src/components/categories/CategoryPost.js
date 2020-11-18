@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from "react"
 import { PostContext } from "../posts/PostProvider"
-
+import { Link } from "react-router-dom"
 
 
 export const CategoryViewPosts = props => {
@@ -25,13 +25,12 @@ export const CategoryViewPosts = props => {
                         return <section className = "post-preview" key={post.id}>
                             <div className = "post-preview-header">
                                 {post.author.user.first_name} {post.author.user.last_name}
-                                <span className="edit-button">
-                                    {/* temporary space for edit button */}
-                                    edit
-                                </span>
+                                
                             </div>
                             <div className="post-preview-title">
-                                <h3>{post.title}</h3>
+                                <Link to={`/posts/${post.id}`}>
+                                            <h3>{post.title}</h3>
+                                </Link>
                             </div>
                             <div className = "post-preview-footer">
                                 {post.category.label}
