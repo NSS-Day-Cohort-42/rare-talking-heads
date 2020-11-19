@@ -4,15 +4,15 @@ import { PostContext } from "./PostProvider"
 import "./Posts.css"
 import "../comments/Comment.css"
 import { PostTags } from "../PostTags/PostTags"
-
+import { ProfileContext } from "../auth/AuthProvider"
 import {ReactionContext} from "../reactions/ReactionProvider"
 
 export const PostDetail = (props) => {
     const { getSinglePost, parsePostContent, deletePost} = useContext(PostContext);
     // const {getCommentsByPost, deleteComment, comments, setComments} = useContext(CommentContext)
     const {addDeleteReaction, getReactionTypes, reactionTypes, postReactions, getPostReactionsByPostId} = useContext(ReactionContext)
-   
-    // const postId = useParams();
+
+    const { isAdmin } = useContext(ProfileContext)
 
     const [post, setPost] = useState({
         id: 0,
@@ -45,8 +45,6 @@ export const PostDetail = (props) => {
             setEditMode(true);
         }
     }, [post.id])
-
-    console.log(postReactions)
 
     return (
         <div className="post">
@@ -94,7 +92,7 @@ export const PostDetail = (props) => {
                 </div>
                 <div className="post-info-r">
                     <div className="post-edit-buttons">
-                        {editMode 
+                        {editMode || isAdmin
                             ? <i className="fas fa-trash-alt" id="delete-post-button" onClick={() => {setDeleteWarning(true)}}></i> 
                             : ''}
                     </div>
