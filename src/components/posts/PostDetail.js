@@ -5,10 +5,12 @@ import "./Posts.css"
 import "../comments/Comment.css"
 import { PostTags } from "../PostTags/PostTags"
 
+import {ReactionContext} from "../reactions/ReactionProvider"
+
 export const PostDetail = (props) => {
     const { getSinglePost, parsePostContent, deletePost} = useContext(PostContext);
     // const {getCommentsByPost, deleteComment, comments, setComments} = useContext(CommentContext)
-    
+    const {addDeleteReaction} = useContext(ReactionContext)
    
     // const postId = useParams();
 
@@ -62,6 +64,10 @@ export const PostDetail = (props) => {
                             () => props.history.push(`/comments/post/${props.match.params.postId}`)
                         }>View Comments</button>
                     </div>
+            <div className="reaction__test">
+                <button className="btn btn-secondary" onClick={() => {addDeleteReaction(parseInt(props.match.params.postId), 2)}}>Reaction</button>
+            </div>
+
             <div className="post-info">
                 <div className="post-info-l">
                     <div>

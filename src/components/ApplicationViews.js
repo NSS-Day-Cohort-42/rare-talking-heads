@@ -26,6 +26,8 @@ import {UserList} from "./users/UserList"
 import {UserDetail} from "./users/UserDetail"
 import { SubscriptionProvider } from "./subscriptions/SubscriptionProvider"
 
+import {ReactionProvider} from "./reactions/ReactionProvider"
+
 
 export const ApplicationViews = (props) => {
     return (
@@ -44,6 +46,7 @@ export const ApplicationViews = (props) => {
                     <CategoryProvider>
                         <CommentProvider>
                             <SubscriptionProvider>
+                                <ReactionProvider>
                         
                                 <Route exact path="/posts/:postId(\d+)" render={ props => <PostDetail history={props.history} {...props} /> } />
 
@@ -91,7 +94,7 @@ export const ApplicationViews = (props) => {
                                     }
                                 }>
                                 </Route>
-
+                                </ReactionProvider>
                             </SubscriptionProvider>
                         </CommentProvider>
                     </CategoryProvider>
