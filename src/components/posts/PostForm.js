@@ -72,7 +72,7 @@ export const PostForm = (props) => {
 
     return (
         <form className="PostForm">
-            <h3 className="PostForm__header">{editMode ? "Edit Your Post" : "Create a New Post"}</h3>
+            <h3 className="PostForm__header text-center">{editMode ? "Edit Your Post" : "Create a New Post"}</h3>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="title">Title :</label>
@@ -86,7 +86,7 @@ export const PostForm = (props) => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="content">Content :</label>
-                    <input type="text" name="content" required autoFocus className="form-control"
+                    <textarea type="text" name="content" rows="15" required autoFocus className="form-control"
                         placeholder="Post content"
                         defaultValue={post.content}
                         onChange={handleControlledInputChange}
@@ -121,6 +121,7 @@ export const PostForm = (props) => {
                 </div>
             </fieldset>
 
+            <label>Tags: </label>
             <div className="tag-container">
                 {
                     tags.map(t => <TagBoxes tag={t} selectedTags={selectedTags} setTags={setTags}  post={post} editMode={editMode} {...props} />)
@@ -132,7 +133,7 @@ export const PostForm = (props) => {
                     e.preventDefault()
                     constructNewPost()
                 }}
-                className="btn btn-form">
+                className="btn btn-form btn-warning btn-sm mt-3">
                     {editMode ? "Save Updates" : "Save New Post"}
                 </button>
         </form>

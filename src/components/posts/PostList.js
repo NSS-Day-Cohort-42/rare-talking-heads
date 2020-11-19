@@ -59,7 +59,7 @@ export const PostList = props => {
                     {view === 'subscribed' ? 'My Subscribed ' : ''}
                     Posts
                 </h1>
-                <button className="addPostBtn btn btn-primary"
+                <button className="addPostBtn btn btn-warning btn-sm"
                 onClick={
                     () =>
                     props.history.push("/posts/create")}>Add New Post</button>
