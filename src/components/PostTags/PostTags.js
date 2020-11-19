@@ -29,7 +29,7 @@ export const PostTags = ({postId, postOwner}) => {
     return (
         <div className="post-tags-container">
             <h4 className="post-tags-header">Tags</h4>
-            {postOwner ? <button className="edit-post-tags-bttn" onClick={toggleEdit}>Manage tags</button>
+            {postOwner ? <button className="btn btn-primary" onClick={toggleEdit}>Manage tags</button>
             : ``}
             {isEditing ?
                     (
