@@ -95,3 +95,8 @@
     color: red;
     cursor: pointer;
 }
+
+.reaction-button {
+    cursor: pointer;
+    height: 30px;
+}

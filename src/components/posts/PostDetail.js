@@ -10,7 +10,7 @@ import {ReactionContext} from "../reactions/ReactionProvider"
 export const PostDetail = (props) => {
     const { getSinglePost, parsePostContent, deletePost} = useContext(PostContext);
     // const {getCommentsByPost, deleteComment, comments, setComments} = useContext(CommentContext)
-    const {addDeleteReaction} = useContext(ReactionContext)
+    const {addDeleteReaction, getReactionTypes, reactionTypes, postReactions, getPostReactionsByPostId} = useContext(ReactionContext)
    
     // const postId = useParams();
 
@@ -31,27 +31,23 @@ export const PostDetail = (props) => {
 
     const [deleteWarning, setDeleteWarning] = useState(false);
 
-    // const currentUser = localStorage.getItem("rare_user_id") === post.id;
-    
     useEffect(() => {
         const postId = parseInt(props.match.params.postId);
         
         getSinglePost(postId)
             .then(setPost)
+        getReactionTypes()
+        getPostReactionsByPostId(postId)
     }, []);
-
-    // useEffect(() => {
-    //     const postId = parseInt(props.match.params.postId)
-    //     getCommentsByPost(postId)
-        
-    // },[])
 
     useEffect(() => {
         if (post.is_owner === true) {
             setEditMode(true);
         }
     }, [post.id])
-    
+
+    console.log(postReactions)
+
     return (
         <div className="post">
             <h1 className = "post-title">
@@ -60,12 +56,21 @@ export const PostDetail = (props) => {
             <img className="post-img-header" src={post.image_url} alt="" />
             <div className="viewCommentBtn text-center">
                         <button className="btn btn-primary " onClick={
-                            
                             () => props.history.push(`/comments/post/${props.match.params.postId}`)
                         }>View Comments</button>
                     </div>
-            <div className="reaction__test">
-                <button className="btn btn-secondary" onClick={() => {addDeleteReaction(parseInt(props.match.params.postId), 2)}}>Reaction</button>
+            <div className="reactions">
+                {
+                    reactionTypes.map(reaction => { return (
+                    <>
+                        <img src={reaction.image_url} className="reaction-button ml-2" alt="" onClick={() => {
+                            addDeleteReaction(parseInt(props.match.params.postId), reaction.id)
+                            .then(() => {getPostReactionsByPostId(parseInt(props.match.params.postId))})
+                        }} />
+                        {postReactions[reaction.id]}
+                    </>
+                    )})
+                }
             </div>
 
             <div className="post-info">
