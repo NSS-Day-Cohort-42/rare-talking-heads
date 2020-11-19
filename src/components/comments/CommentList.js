@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { CommentContext } from '../comments/CommentProvider';
-
+import { ProfileContext } from '../auth/AuthProvider'
 import "../comments/Comment.css"
 import { PostContext } from '../posts/PostProvider';
 
@@ -8,7 +8,7 @@ import { PostContext } from '../posts/PostProvider';
 export const CommentList = (props) => {
     const {getCommentsByPost, deleteComment, comments} = useContext(CommentContext)
     const {getSinglePost} = useContext(PostContext)
-
+    const { isAdmin } = useContext(ProfileContext)
     const [singlePost, setSinglePost] = useState({})
 
     
@@ -50,7 +50,7 @@ export const CommentList = (props) => {
             
                 {
                     comments.map(com => {
-                        if(com.is_owner === true) {
+                        if(com.is_owner === true || isAdmin) {
                             return <section className="comment card w-50 border-primary" key={com.id}>
                                 
                                 <div className="comment__subject card-header">{com.subject}</div>
@@ -59,7 +59,7 @@ export const CommentList = (props) => {
                                 </div>
                                 <div className="card-footer">
                                 <div className="comment__userName card-text"><small className="text-muted">{com.commenter && com.commenter.user.username}</small></div>
-                                <img className="avatar avatar-xs rounded-circle float-right" src={com.commenter.profile_image_url} />
+                                <img className="avatar avatar-xs rounded-circle float-right" src={com.commenter.profile_image_url} alt="" />
                                 <button className = "mr-2 btn btn-primary" onClick={
                                     () => props.history.push(`/comments/edit/${com.id}`)
                                 }>Edit</button>
@@ -67,7 +67,6 @@ export const CommentList = (props) => {
                                 <button className="mr-2 btn btn-danger" onClick={
                                     () => {
                                         const postId = parseInt(props.match.params.postId)
-                                        console.log(postId)
                                         deleteComment(com)
                                     }
                                 }>Delete</button>
