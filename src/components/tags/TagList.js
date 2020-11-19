@@ -22,35 +22,36 @@ export default (props) => {
             <h3 className="tag_heading">
                 Tags
             </h3>
-            <div className="addTagBtn">
-                <button className="btn btn-primary" onClick={() => props.history.push("/tags/create")}>
-                    Create Tag
-                </button>
-            </div>
+            
             <div className="tags">
                 <table>
                     <tbody>
                         {tags.map((tag) => (
+                            <>
                             <tr>
                                 <td>
                                     {/* If the user id an admin they are able to edit and delete a tag */}
                                     {isAdmin 
-                                        ? <div><button className="btn tagEditBtn" onClick={
+                                        ? <div>
+                                            <button className="btn btn-danger tagDeleteButton"
+                                            onClick={() => {setDeleteWarning(tag.id)}}>
+                                                <i className="fas fa-trash-alt fa-sm" id="delete-tag-button" size="sm"></i>
+                                            </button>
+                                            <button className="btn btn-dark tagEditBtn" onClick={
                                             () => {
                                                 setTag(tag)
                                                 props.history.push(`/tags/edit/${tag.id}`)
                                             }
-                                        }><i className="fas fa-edit fa-sm" id="edit-tag-button" size="sm"/></button>
-                                            <button className="btn tagDeleteButton"
-                                            onClick={() => {setDeleteWarning(tag.id)}}>
-                                                <i className="fas fa-trash-alt fa-sm" id="delete-tag-button" size="sm"></i>
-                                                </button>
+                                            }><i className="fas fa-edit fa-sm" id="edit-tag-button" size="sm"/></button>
                                         </div>
                                         : ''}
                                 </td>
                                 <td>
                                     <Tag tag={tag} key={tag.id} />
                                 </td>
+                                
+                            </tr>
+                            <tr>
                                 {/* The confirmation that appears after a user clicks the trash icon */}
                                 { deleteWarning === tag.id
                                     ? <div className="alert alert-danger" role="alert">
@@ -61,9 +62,15 @@ export default (props) => {
                                     : ''
                                     }
                             </tr>
+                            </>
                         ))}
                     </tbody>
                 </table>
+                <div className="addTagBtn">
+                <button className="btn btn-warning btn-sm" onClick={() => props.history.push("/tags/create")}>
+                    Create Tag
+                </button>
+            </div>
             </div>
         </div>
         </>

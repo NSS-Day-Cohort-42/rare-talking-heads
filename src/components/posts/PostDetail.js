@@ -54,8 +54,9 @@ export const PostDetail = (props) => {
                 {post.title}
             </h1>
             <img className="post-img-header" src={post.image_url} alt="" />
+            <div className="post-inner">
             <div className="viewCommentBtn text-center">
-                        <button className="btn btn-primary " onClick={
+                        <button className="btn btn-sm btn-warning " onClick={
                             () => props.history.push(`/comments/post/${props.match.params.postId}`)
                         }>View Comments</button>
                     </div>
@@ -84,11 +85,8 @@ export const PostDetail = (props) => {
                         </span>
                     </div>
                     <div>
-                        <span className="post-category">
-                            {post.category && post.category.label}
-                        </span>
-                        <span className="post-tags">
-                            {/* tags will go here */}
+                        <span className="post-category">  
+                            {`Category:  ${post.category && post.category.label}`}
                         </span>
                     </div>
                 </div>
@@ -115,6 +113,8 @@ export const PostDetail = (props) => {
             <div className="post-content">
                 {parsePostContent(post.content).map(paragraph => <p>{paragraph}</p>)}
             </div>
+            </div>
+            
             
         </div>
     )

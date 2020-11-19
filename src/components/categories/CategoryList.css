@@ -2,6 +2,11 @@
     display:flex;
     flex-direction: column;
     align-items: center;
+    margin: auto;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: lightgrey;
+    width: 90vw;
 }
 
 .category {
@@ -20,4 +25,10 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    margin-top: 10px;
+}
+
+.CategoryForm {
+    width: 50%;
+    margin: auto;
 }

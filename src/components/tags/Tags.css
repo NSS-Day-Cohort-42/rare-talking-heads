@@ -2,11 +2,20 @@
     display:flex;
     flex-direction: column;
     align-items: center;
+    margin: auto;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: lightgrey;
+    width: 90vw;
+    padding: 15px;
 }
 
 .tag {
     display:flex;
-    padding-top:1.5rem;
     align-items: baseline;
     font-size: 1.25rem;
+}
+
+.addTagBtn {
+    text-align: center;
 }

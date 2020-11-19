@@ -4,6 +4,7 @@ import {Link} from "react-router-dom"
 
 import {UserContext} from "./UserProvider"
 import {ProfileContext} from "../auth/AuthProvider"
+import "./users.css"
 
 export const UserList = props => {
     const {users, getAllUsers, changeUserType, changeUserActiveStatus} = useContext(UserContext)
@@ -40,7 +41,7 @@ export const UserList = props => {
     return (
         <>
         <article className="users-list">
-            <table className="table">
+            <table className="table table-borderless">
                 <thead>
                     <tr>
                         <th scope="col">Username</th>

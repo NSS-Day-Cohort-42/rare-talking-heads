@@ -8,9 +8,11 @@
 
 .post-preview {
     width: 90%;
-    border: 1px solid black;
+    border: 2px solid black;
+    background-color: lightgray;
+    border-radius: 20px;
     margin: 15px;
-    padding: 5px;
+    padding: 10px;
 }
 
 .post-preview-header {
@@ -30,11 +32,19 @@
 }
 
 .post {
+    border: solid black 2px;
+    background-color: lightgray;
+    border-radius: 20px;
+    margin: 10px;
+}
+
+.post-inner {
     padding: 15px;
 }
 
 .post-title {
     text-align: center;
+    margin-top: 15px;
 }
 
 
@@ -78,6 +88,11 @@
     font-weight: 700;
 }
 
+.post-tags-header {
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
 .post-tags {
     margin-left: 20px;
 }
@@ -88,7 +103,7 @@
 }
 
 #delete-post-button {
-    color: grey;
+    color: black;
 }
 
 #delete-post-button:hover {
