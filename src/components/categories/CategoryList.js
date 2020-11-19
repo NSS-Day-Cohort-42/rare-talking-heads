@@ -23,12 +23,7 @@ export const CategoryList = (props) => {
                         Categories
                     </h3>
                     <div className="addCategorybtn col-4">
-                    <button className="btn btn-primary" onClick={
-                        () => 
-                            props.history.push("/categories/create")
                     
-                    }>Add Category
-                    </button>
             </div>
                 </div>
                 <div className="categories">
@@ -37,13 +32,13 @@ export const CategoryList = (props) => {
                             {categories.map(c =>
                                 <tr>
                                     <td>
-                                        <button className="btn categoryDeleteBtn" onClick={
+                                        <button className="btn btn-danger categoryDeleteBtn" onClick={
                                             () => {
                                             deleteCategory(c)
                                         }
                                         }><i className="fas fa-trash-alt fa-sm" id="delete-category-button" size="sm"/></button>
                                         
-                                        <button className="btn categoryEditBtn" onClick={
+                                        <button className="btn btn-dark categoryEditBtn" onClick={
                                             () => {
                                             setCategory(c)
                                             props.history.push(`/categories/edit/${c.id}`)
@@ -59,6 +54,12 @@ export const CategoryList = (props) => {
                         </tbody>
                     </table>
                 </div>
+                <button className="btn btn-warning mt-3 btn-sm" onClick={
+                        () => 
+                            props.history.push("/categories/create")
+                    
+                    }>Add Category
+                    </button>
             </div>
             
         </>

@@ -1,0 +1,6 @@
+.users-list {
+  border: solid 2px black;
+  margin: 15px;
+  border-radius: 20px;
+  background-color: lightgrey;
+}
