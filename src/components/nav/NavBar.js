@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom"
 import { ProfileContext } from "../auth/AuthProvider"
 
 import "./NavBar.css"
-import Logo from "./rare.jpeg"
+import Logo from "./talking-heads-logo.png"
 
 export const NavBar = () => {
     const history = useHistory()

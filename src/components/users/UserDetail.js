@@ -54,7 +54,7 @@ export const UserDetail = (props) => {
         <article className="user container">
             <div className="row">
             { imgCheck ?
-            <img className="col-5" src={user.profile_image_url} />
+            <img className="" src={user.profile_image_url} />
             :
             <div><i className="fas fa-user fa-10x"></i></div>
             }
@@ -82,9 +82,12 @@ export const UserDetail = (props) => {
             </div>
             <div className="row">
                 
-            <div className="user__name col-5">Name: {user.user && user.user.first_name} {user.user && user.user.last_name}</div>
+            <div className="user__name col-5 text-strong">{user.user && user.user.first_name} {user.user && user.user.last_name}</div>
             </div>
+            
         </article>
+
+        <h3 className="text-center m-4">{user.user && user.user.first_name} {user.user && user.user.last_name}'s Posts:</h3>
         
         {
         
