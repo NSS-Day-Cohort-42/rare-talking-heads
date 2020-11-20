@@ -51,7 +51,7 @@
 .post-img-header {
     overflow: hidden;
     width: 100%; /* width of container */
-    height: 250px; /* height of container */
+    height: 450px; /* height of container */
     object-fit: cover;
     object-position: 50%; 
     }
@@ -115,3 +115,18 @@
     cursor: pointer;
     height: 30px;
 }
+
+.PostForm {
+    width: 80%;
+    margin: auto;
+}
+
+.PostForm > .tag-container {
+    width: 300px;
+    margin: 0 !important;
+    background-color: white;
+    border: 0;
+    border-radius: 5px;
+}
+
+
